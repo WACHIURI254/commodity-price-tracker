@@ -28,7 +28,7 @@ jobs:
 
       # Run scraper
       - name: Run scraper
-        run: python jumia_scraper.py
+        run: python scraper.py
 
       # Commit and force push changes
       - name: Commit and push changes
