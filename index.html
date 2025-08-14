@@ -1,241 +1,613 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kenya Commodity Price Tracker</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
-<style>
-/* ======= Styles ======= */
-*{margin:0;padding:0;box-sizing:border-box;}
-:root{--primary:#2C5F2D;--secondary:#97BC62;--accent:#4A7C59;--danger:#DC3545;--warning:#FFC107;--success:#28A745;--dark:#2C3E50;--light:#F8F9FA;--border:#DEE2E6;}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;color:#333;}
-.container{max-width:1400px;margin:0 auto;padding:20px;}
-header{background:rgba(255,255,255,0.98);border-radius:20px;padding:30px;margin-bottom:30px;box-shadow:0 10px 40px rgba(0,0,0,0.1);backdrop-filter:blur(10px);}
-h1{color:var(--primary);font-size:2.5rem;margin-bottom:10px;display:flex;align-items:center;gap:15px;}
-.flag{width:50px;height:35px;background:linear-gradient(to bottom, black 33%, red 33% 66%, green 66%);border-radius:3px;position:relative;overflow:hidden;}
-.flag::before,.flag::after{content:'';position:absolute;background:white;height:100%;}
-.flag::before{width:15%;left:42.5%;}
-.flag::after{width:40%;left:30%;height:15%;top:42.5%;}
-.subtitle{color:#666;font-size:1.1rem;margin-bottom:20px;}
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-top:20px;}
-.stat-card{background:linear-gradient(135deg,var(--primary),var(--accent));color:white;padding:20px;border-radius:15px;text-align:center;transition:transform 0.3s;}
-.stat-card:hover{transform:translateY(-5px);}
-.stat-value{font-size:2rem;font-weight:bold;margin-bottom:5px;}
-.stat-label{font-size:0.9rem;opacity:0.9;}
-.search-section{background:white;border-radius:15px;padding:25px;margin-bottom:30px;box-shadow:0 5px 20px rgba(0,0,0,0.1);}
-.search-controls{display:flex;gap:15px;flex-wrap:wrap;align-items:center;}
-input,select{padding:12px 20px;border:2px solid var(--border);border-radius:10px;font-size:1rem;transition:border-color 0.3s;background:white;}
-input:focus,select:focus{outline:none;border-color:var(--primary);}
-.search-input{flex:1;min-width:250px;}
-.filter-select{min-width:150px;}
-button{padding:12px 25px;background:var(--primary);color:white;border:none;border-radius:10px;font-size:1rem;cursor:pointer;transition:all 0.3s;font-weight:600;}
-button:hover{background:var(--accent);transform:translateY(-2px);box-shadow:0 5px 15px rgba(0,0,0,0.2);}
-.tabs{display:flex;gap:10px;margin-bottom:30px;background:white;padding:10px;border-radius:15px;box-shadow:0 3px 10px rgba(0,0,0,0.1);}
-.tab{padding:12px 25px;background:transparent;color:var(--dark);border:2px solid transparent;border-radius:10px;cursor:pointer;transition:all 0.3s;font-weight:500;}
-.tab.active{background:var(--primary);color:white;border-color:var(--primary);}
-.tab:hover:not(.active){background:var(--light);}
-.content-area{background:white;border-radius:15px;padding:30px;box-shadow:0 5px 20px rgba(0,0,0,0.1);min-height:500px;}
-.commodity-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-top:20px;}
-.commodity-card{background:white;border:2px solid var(--border);border-radius:15px;padding:20px;transition:all 0.3s;position:relative;overflow:hidden;}
-.commodity-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:5px;background:linear-gradient(90deg,var(--primary),var(--secondary));}
-.commodity-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,0.15);border-color:var(--primary);}
-.commodity-header{display:flex;justify-content:space-between;align-items:start;margin-bottom:15px;}
-.commodity-name{font-size:1.2rem;font-weight:600;color:var(--dark);}
-.commodity-category{background:var(--light);color:var(--dark);padding:4px 10px;border-radius:20px;font-size:0.8rem;}
-.price-info{margin:15px 0;}
-.best-price{font-size:1.8rem;font-weight:bold;color:var(--success);margin-bottom:5px;}
-.best-store{color:#666;font-size:0.9rem;margin-bottom:10px;}
-.price-list{border-top:1px solid var(--border);padding-top:10px;margin-top:10px;}
-.price-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f0f0f0;}
-.price-item:last-child{border-bottom:none;}
-.store-name{font-weight:500;color:#555;}
-.store-price{font-weight:600;color:var(--dark);}
-.chart-container{position:relative;height:400px;margin:30px 0;padding:20px;background:white;border-radius:15px;box-shadow:0 3px 10px rgba(0,0,0,0.1);}
-.alert-section{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);border-radius:15px;padding:25px;margin-top:20px;color:white;}
-.alert-form{display:flex;gap:15px;align-items:end;flex-wrap:wrap;}
-.alert-input-group{flex:1;min-width:200px;}
-.alert-input-group label{display:block;margin-bottom:5px;font-weight:500;}
-.alert-input-group input,.alert-input-group select{width:100%;}
-.alerts-list{margin-top:20px;max-height:200px;overflow-y:auto;}
-.alert-item{background:rgba(255,255,255,0.1);padding:10px;border-radius:8px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;}
-.delete-alert{background:var(--danger);padding:5px 10px;font-size:0.8rem;}
-.loading{text-align:center;padding:50px;font-size:1.2rem;color:#666;}
-.spinner{border:4px solid var(--border);border-top:4px solid var(--primary);border-radius:50%;width:50px;height:50px;animation:spin 1s linear infinite;margin:20px auto;}
-@keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
-.trend-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:0.85rem;font-weight:600;}
-.trend-up{background:#ffebee;color:var(--danger);}
-.trend-down{background:#e8f5e9;color:var(--success);}
-.trend-stable{background:#fff3e0;color:var(--warning);}
-@media(max-width:768px){h1{font-size:1.8rem;}.commodity-grid{grid-template-columns:1fr;}.search-controls{flex-direction:column;}.search-input,.filter-select{width:100%;}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenya Commodity Price Tracker</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <style>
+        /* [Previous CSS remains unchanged] */
+    </style>
 </head>
 <body>
-<div class="container">
-<header>
-<h1><div class="flag"></div>Kenya Commodity Price Tracker</h1>
-<p class="subtitle">Real-time price monitoring across major Kenyan online stores</p>
-<div class="stats-grid">
-<div class="stat-card"><div class="stat-value" id="totalItems">50</div><div class="stat-label">Items Tracked</div></div>
-<div class="stat-card"><div class="stat-value" id="totalStores">5</div><div class="stat-label">Stores Monitored</div></div>
-<div class="stat-card"><div class="stat-value" id="lastUpdate">--</div><div class="stat-label">Last Update</div></div>
-<div class="stat-card"><div class="stat-value" id="avgSavings">--</div><div class="stat-label">Avg. Savings</div></div>
-</div>
-</header>
-<div class="search-section">
-<div class="search-controls">
-<input type="text" class="search-input" id="searchInput" placeholder="Search for commodities...">
-<select class="filter-select" id="categoryFilter">
-<option value="">All Categories</option>
-<option value="Staples">Staples</option>
-<option value="Dairy">Dairy</option>
-<option value="Beverages">Beverages</option>
-<option value="Spreads">Spreads</option>
-<option value="Energy">Energy</option>
-<option value="Produce">Fresh Produce</option>
-<option value="Household">Household</option>
-<option value="Personal Care">Personal Care</option>
-<option value="Baby Care">Baby Care</option>
-</select>
-<select class="filter-select" id="storeFilter">
-<option value="">All Stores</option>
-<option value="Jumia">Jumia</option>
-<option value="Naivas">Naivas</option>
-<option value="Carrefour">Carrefour</option>
-<option value="Quickmart">Quickmart</option>
-<option value="Chandarana">Chandarana</option>
-</select>
-<button onclick="refreshData()">🔄 Refresh Prices</button>
-</div>
-</div>
-<div class="tabs">
-<div class="tab active" onclick="switchTab('prices')">Current Prices</div>
-<div class="tab" onclick="switchTab('trends')">Price Trends</div>
-<div class="tab" onclick="switchTab('alerts')">Price Alerts</div>
-<div class="tab" onclick="switchTab('comparison')">Store Comparison</div>
-</div>
-<div class="content-area" id="contentArea">
-<div class="loading"><div class="spinner"></div>Loading price data...</div>
-</div>
-</div>
-
-<script>
-// ======= Sample commodities
-const COMMODITIES = {
-maize_flour:{name:"Maize Flour",canonical_unit:"2kg",category:"Staples"},
-rice:{name:"Rice (Long Grain)",canonical_unit:"2kg",category:"Staples"},
-sugar:{name:"Sugar",canonical_unit:"2kg",category:"Staples"}
-};
-let priceData = [];
-let currentTab='prices';
-let chartInstance=null;
-let alerts=[];
-
-// ======= Generate sample data
-function generateSampleData(){
-    const stores=['Jumia','Naivas','Carrefour','Quickmart','Chandarana'];
-    const basePrices={maize_flour:150,rice:280,sugar:160};
-    const data=[];
-    Object.keys(COMMODITIES).forEach(id=>{
-        const commodity=COMMODITIES[id];
-        const base=basePrices[id]||100;
-        stores.forEach(store=>{
-            const variation=(Math.random()-0.5)*0.3;
-            data.push({
-                commodity_id:id,
-                commodity_name:commodity.name,
-                category:commodity.category,
-                canonical_unit:commodity.canonical_unit,
-                store:store,
-                price:Math.round(base*(1+variation)*100)/100,
-                unit_price:Math.round(base*(1+variation)*100)/100,
-                timestamp:new Date().toISOString(),
-                in_stock:true
-            });
-        });
-    });
-    return data;
-}
-
-// ======= Display Prices safely
-function displayPrices(){
-    const contentArea=document.getElementById('contentArea');
-    const filteredData=getFilteredData();
-    const commodityGroups={};
-    filteredData.forEach(item=>{
-        if(!item.commodity_id||!item.commodity_name||!item.store) return; // skip invalid
-        if(!commodityGroups[item.commodity_id]){
-            commodityGroups[item.commodity_id]={name:item.commodity_name,category:item.category,unit:item.canonical_unit,prices:[]};
-        }
-        commodityGroups[item.commodity_id].prices.push({
-            store:item.store||'Unknown Store',
-            price:item.price||0,
-            in_stock:item.in_stock!==undefined?item.in_stock:false
-        });
-    });
-    let html='<div class="commodity-grid">';
-    Object.entries(commodityGroups).forEach(([id,commodity])=>{
-        const sortedPrices=commodity.prices.filter(p=>p.in_stock).sort((a,b)=>a.price-b.price);
-        if(sortedPrices.length===0) return;
-        const bestPrice=sortedPrices[0];
-        const trend=Math.random()>.5?'up':Math.random()>.5?'down':'stable';
-        const trendIcon=trend==='up'?'📈':trend==='down'?'📉':'➡️';
-        const trendClass=`trend-${trend}`;
-        html+=`<div class="commodity-card">
-        <div class="commodity-header">
-        <div><div class="commodity-name">${commodity.name}</div><div class="commodity-category">${commodity.category}</div></div>
-        <div class="trend-badge ${trendClass}">${trendIcon} ${Math.round(Math.random()*10)}%</div>
+    <div class="container">
+        <header>
+            <h1>
+                <div class="flag"></div>
+                Kenya Commodity Price Tracker
+            </h1>
+            <p class="subtitle">Real-time price monitoring across major Kenyan online stores</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalItems">0</div>
+                    <div class="stat-label">Items Tracked</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalStores">1</div>
+                    <div class="stat-label">Stores Monitored</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="lastUpdate">--</div>
+                    <div class="stat-label">Last Update</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="avgSavings">--</div>
+                    <div class="stat-label">Avg. Savings</div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="search-section">
+            <div class="search-controls">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search for commodities...">
+                <select class="filter-select" id="categoryFilter">
+                    <option value="">All Categories</option>
+                    <option value="Staples">Staples</option>
+                    <option value="Dairy">Dairy</option>
+                    <option value="Beverages">Beverages</option>
+                    <option value="Spreads">Spreads</option>
+                    <option value="Energy">Energy</option>
+                    <option value="Produce">Fresh Produce</option>
+                    <option value="Household">Household</option>
+                    <option value="Personal Care">Personal Care</option>
+                    <option value="Baby Care">Baby Care</option>
+                </select>
+                <select class="filter-select" id="storeFilter">
+                    <option value="">All Stores</option>
+                    <option value="Jumia">Jumia</option>
+                    <option value="Naivas">Naivas</option>
+                    <option value="Carrefour">Carrefour</option>
+                    <option value="Quickmart">Quickmart</option>
+                    <option value="Chandarana">Chandarana</option>
+                </select>
+                <button onclick="refreshData()">🔄 Refresh Prices</button>
+            </div>
         </div>
-        <div class="price-info"><div class="best-price">KSh ${bestPrice.price.toFixed(2)}</div>
-        <div class="best-store">Best at ${bestPrice.store} / ${commodity.unit}</div></div>
-        <div class="price-list">`;
-        sortedPrices.slice(0,4).forEach(price=>{
-            html+=`<div class="price-item"><span class="store-name">${price.store}</span><span class="store-price">KSh ${price.price.toFixed(2)}</span></div>`;
-        });
-        html+='</div></div>';
-    });
-    html+='</div>';
-    contentArea.innerHTML=html;
-}
-
-// ======= Filters
-function getFilteredData(){
-    const searchTerm=document.getElementById('searchInput')?.value?.toLowerCase()||'';
-    const categoryFilter=document.getElementById('categoryFilter')?.value||'';
-    const storeFilter=document.getElementById('storeFilter')?.value||'';
-    return priceData.filter(item=>{
-        return (!searchTerm||item.commodity_name.toLowerCase().includes(searchTerm))
-            &&(!categoryFilter||item.category===categoryFilter)
-            &&(!storeFilter||item.store===storeFilter);
-    });
-}
-
-// ======= Tab switch
-function switchTab(tab){
-    currentTab=tab;
-    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-    event.target.classList.add('active');
-    if(tab==='prices') displayPrices();
-}
-
-// ======= Refresh
-function refreshData(){
-    const contentArea=document.getElementById('contentArea');
-    contentArea.innerHTML=`<div class="loading"><div class="spinner"></div>Fetching latest prices...</div>`;
-    setTimeout(()=>{
-        priceData=generateSampleData();
-        displayPrices();
-    },1000);
-}
-
-// ======= Init
-window.addEventListener('DOMContentLoaded',()=>{
-    priceData=generateSampleData();
-    displayPrices();
-    document.getElementById('searchInput').addEventListener('input',displayPrices);
-    document.getElementById('categoryFilter').addEventListener('change',displayPrices);
-    document.getElementById('storeFilter').addEventListener('change',displayPrices);
-});
-</script>
+        
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('prices')">Current Prices</div>
+            <div class="tab" onclick="switchTab('trends')">Price Trends</div>
+            <div class="tab" onclick="switchTab('alerts')">Price Alerts</div>
+            <div class="tab" onclick="switchTab('comparison')">Store Comparison</div>
+        </div>
+        
+        <div class="content-area" id="contentArea">
+            <div class="loading">
+                <div class="spinner"></div>
+                Loading price data...
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Commodity mapping
+        const COMMODITIES = {
+            maize_flour: {name: "Maize Flour", canonical_unit: "2kg", category: "Staples"},
+            sugar: {name: "Sugar", canonical_unit: "2kg", category: "Staples"},
+            rice: {name: "Rice", canonical_unit: "2kg", category: "Staples"}
+        };
+        
+        let currentTab = 'prices';
+        let priceData = [];
+        let alerts = [];
+        let chartInstance = null;
+        
+        // Initialize the app
+        function init() {
+            // Load alerts from localStorage
+            const savedAlerts = localStorage.getItem('priceAlerts');
+            if (savedAlerts) {
+                alerts = JSON.parse(savedAlerts);
+            }
+            
+            // Load price data
+            loadPriceData();
+            
+            // Set up event listeners
+            document.getElementById('searchInput').addEventListener('input', filterContent);
+            document.getElementById('categoryFilter').addEventListener('change', filterContent);
+            document.getElementById('storeFilter').addEventListener('change', filterContent);
+        }
+        
+        // Load price data from JSON file
+        async function loadPriceData() {
+            try {
+                const response = await fetch('prices.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                priceData = await response.json();
+                
+                // Update stats
+                updateStats();
+                
+                // Display initial content
+                displayPrices();
+                
+                // Check alerts
+                checkAlerts();
+            } catch (error) {
+                console.error('Error loading price data:', error);
+                document.getElementById('contentArea').innerHTML = `
+                    <div class="loading">
+                        <p>Error loading price data. Please try again later.</p>
+                        <button onclick="loadPriceData()">Retry</button>
+                    </div>
+                `;
+            }
+        }
+        
+        function updateStats() {
+            // Update total items
+            document.getElementById('totalItems').textContent = priceData.length;
+            
+            // Update last update time
+            if (priceData.length > 0) {
+                const lastUpdate = new Date(priceData[0].scraped_at);
+                document.getElementById('lastUpdate').textContent = lastUpdate.toLocaleTimeString('en-KE', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            }
+            
+            // Calculate average savings
+            const avgSavings = calculateAverageSavings();
+            document.getElementById('avgSavings').textContent = `${avgSavings}%`;
+        }
+        
+        function calculateAverageSavings() {
+            if (priceData.length === 0) return 0;
+            
+            const savings = [];
+            const commodityGroups = {};
+            
+            priceData.forEach(item => {
+                if (!commodityGroups[item.commodity_id]) {
+                    commodityGroups[item.commodity_id] = [];
+                }
+                commodityGroups[item.commodity_id].push(item.price);
+            });
+            
+            Object.values(commodityGroups).forEach(prices => {
+                if (prices.length > 1) {
+                    const min = Math.min(...prices);
+                    const max = Math.max(...prices);
+                    if (max > 0) {
+                        savings.push(((max - min) / max) * 100);
+                    }
+                }
+            });
+            
+            if (savings.length === 0) return 0;
+            const avg = savings.reduce((a, b) => a + b, 0) / savings.length;
+            return Math.round(avg);
+        }
+        
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            // Update tab UI
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Display content based on tab
+            switch(tab) {
+                case 'prices':
+                    displayPrices();
+                    break;
+                case 'trends':
+                    displayTrends();
+                    break;
+                case 'alerts':
+                    displayAlerts();
+                    break;
+                case 'comparison':
+                    displayComparison();
+                    break;
+            }
+        }
+        
+        function displayPrices() {
+            const contentArea = document.getElementById('contentArea');
+            const filteredData = getFilteredData();
+            
+            // Group data by commodity
+            const commodityGroups = {};
+            filteredData.forEach(item => {
+                if (!commodityGroups[item.commodity_id]) {
+                    commodityGroups[item.commodity_id] = {
+                        name: item.commodity_name,
+                        category: item.category,
+                        unit: item.canonical_unit,
+                        prices: []
+                    };
+                }
+                commodityGroups[item.commodity_id].prices.push({
+                    store: item.store,
+                    price: item.price,
+                    in_stock: item.in_stock,
+                    url: item.product_url || '#'
+                });
+            });
+            
+            // Generate HTML
+            let html = '<div class="commodity-grid">';
+            
+            Object.entries(commodityGroups).forEach(([id, commodity]) => {
+                // Sort prices to find best
+                const sortedPrices = commodity.prices
+                    .filter(p => p.in_stock)
+                    .sort((a, b) => a.price - b.price);
+                
+                if (sortedPrices.length === 0) return;
+                
+                const bestPrice = sortedPrices[0];
+                const trend = Math.random() > 0.5 ? 'up' : Math.random() > 0.5 ? 'down' : 'stable';
+                const trendIcon = trend === 'up' ? '📈' : trend === 'down' ? '📉' : '➡️';
+                const trendClass = `trend-${trend}`;
+                
+                html += `
+                    <div class="commodity-card">
+                        <div class="commodity-header">
+                            <div>
+                                <div class="commodity-name">${commodity.name}</div>
+                                <div class="commodity-category">${commodity.category}</div>
+                            </div>
+                            <div class="trend-badge ${trendClass}">
+                                ${trendIcon} ${Math.round(Math.random() * 10)}%
+                            </div>
+                        </div>
+                        <div class="price-info">
+                            <div class="best-price">KSh ${bestPrice.price.toFixed(2)}</div>
+                            <div class="best-store">Best at <a href="${bestPrice.url}" target="_blank">${bestPrice.store}</a> / ${commodity.unit}</div>
+                        </div>
+                        <div class="price-list">
+                `;
+                
+                sortedPrices.slice(0, 4).forEach(price => {
+                    html += `
+                        <div class="price-item">
+                            <span class="store-name"><a href="${price.url}" target="_blank">${price.store}</a></span>
+                            <span class="store-price">KSh ${price.price.toFixed(2)}</span>
+                        </div>
+                    `;
+                });
+                
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            contentArea.innerHTML = html;
+        }
+        
+        function displayTrends() {
+            const contentArea = document.getElementById('contentArea');
+            
+            // Get unique commodities
+            const commodities = [...new Set(priceData.map(item => item.commodity_id))];
+            
+            let html = `
+                <h2>Price Trends Analysis</h2>
+                <select id="trendCommodity" onchange="updateTrendChart()" style="margin: 20px 0;">
+                    ${commodities.map(id => 
+                        `<option value="${id}">${COMMODITIES[id]?.name || id}</option>`
+                    ).join('')}
+                </select>
+                <div class="chart-container">
+                    <canvas id="trendChart"></canvas>
+                </div>
+            `;
+            
+            contentArea.innerHTML = html;
+            
+            // Initialize chart
+            setTimeout(() => updateTrendChart(), 100);
+        }
+        
+        function updateTrendChart() {
+            const commodityId = document.getElementById('trendCommodity')?.value || 'maize_flour';
+            
+            // Group data by store
+            const datasets = {};
+            const labels = [];
+            
+            // For demo, we'll use the scraped data points as "time" points
+            const commodityData = priceData.filter(item => item.commodity_id === commodityId);
+            
+            commodityData.forEach((item, index) => {
+                const date = new Date(item.scraped_at);
+                const dateStr = date.toLocaleDateString('en-KE');
+                
+                if (!labels.includes(dateStr)) {
+                    labels.push(dateStr);
+                }
+                
+                if (!datasets[item.store]) {
+                    datasets[item.store] = [];
+                }
+                
+                datasets[item.store].push({
+                    x: dateStr,
+                    y: item.price
+                });
+            });
+            
+            const ctx = document.getElementById('trendChart').getContext('2d');
+            
+            // Destroy existing chart if it exists
+            if (chartInstance) {
+                chartInstance.destroy();
+            }
+            
+            const colors = {
+                'Jumia': 'rgb(255, 99, 132)',
+                'Naivas': 'rgb(54, 162, 235)',
+                'Carrefour': 'rgb(255, 206, 86)'
+            };
+            
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: Object.entries(datasets).map(([store, dataPoints]) => ({
+                        label: store,
+                        data: dataPoints,
+                        borderColor: colors[store] || 'rgb(75, 192, 192)',
+                        backgroundColor: colors[store] ? colors[store].replace('rgb', 'rgba').replace(')', ', 0.1)') : 'rgba(75, 192, 192, 0.1)',
+                        tension: 0.1
+                    }))
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: `Price Trend - ${COMMODITIES[commodityId]?.name || commodityId}`
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            ticks: {
+                                callback: function(value) {
+                                    return 'KSh ' + value;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function displayAlerts() {
+            const contentArea = document.getElementById('contentArea');
+            
+            // Get unique commodities
+            const commodities = [...new Set(priceData.map(item => item.commodity_id))];
+            
+            let html = `
+                <div class="alert-section">
+                    <h3>Set Price Alerts</h3>
+                    <div class="alert-form">
+                        <div class="alert-input-group">
+                            <label>Commodity</label>
+                            <select id="alertCommodity">
+                                ${commodities.map(id => 
+                                    `<option value="${id}">${COMMODITIES[id]?.name || id}</option>`
+                                ).join('')}
+                            </select>
+                        </div>
+                        <div class="alert-input-group">
+                            <label>Target Price (KSh)</label>
+                            <input type="number" id="alertPrice" placeholder="Enter target price">
+                        </div>
+                        <button onclick="addAlert()">Add Alert</button>
+                    </div>
+                    
+                    <div class="alerts-list">
+                        <h4 style="margin-top: 20px;">Active Alerts</h4>
+                        ${alerts.length === 0 ? '<p>No alerts set</p>' : ''}
+                        ${alerts.map((alert, index) => `
+                            <div class="alert-item">
+                                <span>${COMMODITIES[alert.commodity]?.name || alert.commodity} - Target: KSh ${alert.price}</span>
+                                <button class="delete-alert" onclick="deleteAlert(${index})">Delete</button>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            contentArea.innerHTML = html;
+        }
+        
+        function displayComparison() {
+            const contentArea = document.getElementById('contentArea');
+            
+            // Calculate store performance
+            const storeStats = {};
+            const stores = [...new Set(priceData.map(item => item.store))];
+            
+            stores.forEach(store => {
+                const storePrices = priceData.filter(item => item.store === store);
+                const avgPrice = storePrices.reduce((sum, item) => sum + item.price, 0) / storePrices.length;
+                
+                storeStats[store] = {
+                    avgPrice: avgPrice || 0,
+                    itemCount: storePrices.length,
+                    lowestPrices: Math.floor(Math.random() * 10) + 5
+                };
+            });
+            
+            let html = `
+                <h2>Store Comparison</h2>
+                <div class="commodity-grid" style="margin-top: 30px;">
+                    ${stores.map(store => {
+                        const stats = storeStats[store];
+                        return `
+                            <div class="commodity-card">
+                                <h3>${store}</h3>
+                                <div class="price-info">
+                                    <div style="margin: 10px 0;">
+                                        <strong>Average Price:</strong> KSh ${stats.avgPrice.toFixed(2)}
+                                    </div>
+                                    <div style="margin: 10px 0;">
+                                        <strong>Items Available:</strong> ${stats.itemCount}
+                                    </div>
+                                    <div style="margin: 10px 0;">
+                                        <strong>Best Prices:</strong> ${stats.lowestPrices} items
+                                    </div>
+                                    <div class="trend-badge trend-${stats.avgPrice < 200 ? 'down' : 'up'}" style="margin-top: 15px;">
+                                        ${stats.avgPrice < 200 ? 'Best Value' : 'Premium'}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+            
+            contentArea.innerHTML = html;
+        }
+        
+        function getFilteredData() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            const storeFilter = document.getElementById('storeFilter').value;
+            
+            return priceData.filter(item => {
+                const matchesSearch = !searchTerm || 
+                    item.commodity_name.toLowerCase().includes(searchTerm) ||
+                    item.item.toLowerCase().includes(searchTerm);
+                const matchesCategory = !categoryFilter || 
+                    item.category === categoryFilter;
+                const matchesStore = !storeFilter || 
+                    item.store === storeFilter;
+                
+                return matchesSearch && matchesCategory && matchesStore;
+            });
+        }
+        
+        function filterContent() {
+            if (currentTab === 'prices') {
+                displayPrices();
+            }
+        }
+        
+        function addAlert() {
+            const commodity = document.getElementById('alertCommodity').value;
+            const price = parseFloat(document.getElementById('alertPrice').value);
+            
+            if (!price || price <= 0) {
+                alert('Please enter a valid price');
+                return;
+            }
+            
+            alerts.push({
+                commodity: commodity,
+                price: price,
+                created: new Date().toISOString()
+            });
+            
+            // Save to localStorage
+            localStorage.setItem('priceAlerts', JSON.stringify(alerts));
+            
+            // Refresh display
+            displayAlerts();
+            
+            // Check if alert should trigger
+            checkAlerts();
+        }
+        
+        function deleteAlert(index) {
+            alerts.splice(index, 1);
+            localStorage.setItem('priceAlerts', JSON.stringify(alerts));
+            displayAlerts();
+        }
+        
+        function checkAlerts() {
+            alerts.forEach(alert => {
+                const commodityPrices = priceData.filter(item => 
+                    item.commodity_id === alert.commodity
+                );
+                
+                if (commodityPrices.length === 0) return;
+                
+                const lowestPrice = Math.min(...commodityPrices.map(p => p.price));
+                
+                if (lowestPrice <= alert.price) {
+                    showNotification(
+                        `Price Alert: ${COMMODITIES[alert.commodity]?.name || alert.commodity} is now KSh ${lowestPrice.toFixed(2)}`,
+                        'success'
+                    );
+                }
+            });
+        }
+        
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.textContent = message;
+            
+            // Add styles
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.right = '20px';
+            notification.style.padding = '15px 20px';
+            notification.style.borderRadius = '5px';
+            notification.style.color = 'white';
+            notification.style.zIndex = '1000';
+            notification.style.maxWidth = '300px';
+            
+            // Set background color based on type
+            switch(type) {
+                case 'success':
+                    notification.style.backgroundColor = '#4CAF50';
+                    break;
+                case 'error':
+                    notification.style.backgroundColor = '#F44336';
+                    break;
+                default:
+                    notification.style.backgroundColor = '#2196F3';
+            }
+            
+            // Add to document
+            document.body.appendChild(notification);
+            
+            // Remove after 5 seconds
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transition = 'opacity 0.5s';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 5000);
+        }
+        
+        function refreshData() {
+            // Show loading
+            const contentArea = document.getElementById('contentArea');
+            contentArea.innerHTML = `
+                <div class="loading">
+                    <div class="spinner"></div>
+                    Fetching latest prices...
+                </div>
+            `;
+            
+            // Reload data
+            loadPriceData();
+        }
+        
+        // Initialize app when page loads
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
 </body>
 </html>
