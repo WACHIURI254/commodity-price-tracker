@@ -1,46 +1,47 @@
-# scraper.py
 from playwright.sync_api import sync_playwright
-from bs4 import BeautifulSoup
 import json
-import time
+from datetime import datetime
 
 def scrape_jumia():
-    items = []
-    url = "https://www.jumia.co.ke/mlp-groceries/?page=1"
-
     with sync_playwright() as p:
+        # Launch Chromium in headless mode
         browser = p.chromium.launch(headless=True)
-        page = browser.new_page()
+        context = browser.new_context(
+            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                       "(KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+            viewport={"width": 1366, "height": 768},
+            locale="en-US",
+            timezone_id="Africa/Nairobi"
+        )
 
-        page.goto(url, timeout=60000)
-        time.sleep(3)  # Wait for products to load fully
+        page = context.new_page()
 
-        html = page.content()
-        soup = BeautifulSoup(html, "html.parser")
+        # Go to Jumia search results for Maize Flour
+        page.goto("https://www.jumia.co.ke/catalog/?q=maize+flour", wait_until="domcontentloaded")
 
-        products = soup.select("article.prd")  # Jumia's product container
+        # Wait for products to load
+        page.wait_for_selector(".prd")
 
-        for product in products:
-            name_tag = product.select_one("h3.name")
-            price_tag = product.select_one("div.prc")
+        products = []
+        for product in page.query_selector_all(".prd"):
+            name = product.query_selector(".name")
+            price = product.query_selector(".prc")
 
-            if name_tag and price_tag:
-                name = name_tag.get_text(strip=True)
-                price = price_tag.get_text(strip=True)
-                items.append({
+            if name and price:
+                products.append({
                     "store": "Jumia",
-                    "item": name,
-                    "price": price
+                    "item": name.inner_text().strip(),
+                    "price": price.inner_text().strip(),
+                    "scraped_at": datetime.utcnow().isoformat()
                 })
 
         browser.close()
 
-    return items
+        # Save to prices.json
+        with open("prices.json", "w", encoding="utf-8") as f:
+            json.dump(products, f, ensure_ascii=False, indent=2)
+
+        print(f"Scraped {len(products)} items from Jumia.")
 
 if __name__ == "__main__":
-    data = scrape_jumia()
-
-    with open("prices.json", "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
-
-    print("Scraped data saved to prices.json")
+    scrape_jumia()
