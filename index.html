@@ -1,201 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kenya Commodity Price Tracker</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>
-body { font-family: Arial, sans-serif; margin: 20px; }
-h1 { text-align: center; }
-#chartContainer { width: 100%; max-width: 1000px; margin: 20px auto; }
-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-th { background-color: #f2f2f2; }
-.lowest { background-color: #d4edda; } /* Highlight cheapest option */
-</style>
+  <meta charset="UTF-8">
+  <title>Kenya Commodity Price Tracker</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 20px; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
+    .cheapest { background-color: #d4edda; } /* Highlight cheapest */
+  </style>
 </head>
 <body>
 
 <h1>Kenya Commodity Price Tracker</h1>
 
-<div>
-    <label for="commoditySelect">Select Commodity:</label>
-    <select id="commoditySelect"></select>
+<input type="text" id="searchBox" placeholder="Search commodity..." oninput="filterTable()">
 
-    <label for="periodSelect" style="margin-left:20px;">Select Period:</label>
-    <select id="periodSelect">
-        <option value="daily">Daily</option>
-        <option value="weekly">Weekly</option>
-        <option value="monthly">Monthly</option>
-    </select>
-</div>
-
-<div id="chartContainer">
-    <canvas id="priceChart"></canvas>
-</div>
-
-<table id="pricesTable">
-    <thead>
-        <tr>
-            <th>Commodity</th>
-            <th>Store</th>
-            <th>Price (KES)</th>
-            <th>Unit</th>
-            <th>Timestamp</th>
-        </tr>
-    </thead>
-    <tbody></tbody>
+<table id="priceTable">
+  <thead>
+    <tr>
+      <th>Commodity</th>
+      <th>Unit</th>
+      <th>Store</th>
+      <th>Price (KES)</th>
+      <th>Timestamp</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
 </table>
+
+<h2>Price Trends</h2>
+<select id="trendPeriod" onchange="updateChart()">
+  <option value="daily">Daily</option>
+  <option value="weekly">Weekly</option>
+  <option value="monthly">Monthly</option>
+</select>
+<canvas id="priceChart" width="800" height="400"></canvas>
 
 <script>
 let pricesData = [];
 let chart;
-let selectedCommodity = null;
-let selectedPeriod = 'daily';
 
-// Load prices.json
 async function loadPrices() {
-    const res = await fetch('prices.json');
-    pricesData = await res.json();
-    populateCommoditySelect();
-    populatePeriodSelect();
-    displayPricesTable();
+  try {
+    const response = await fetch('prices.json');
+    pricesData = await response.json();
+    displayTable();
+    createChart();
+  } catch (err) {
+    console.error('Error loading prices.json:', err);
+  }
 }
 
-// Populate commodity dropdown
-function populateCommoditySelect() {
-    const select = document.getElementById('commoditySelect');
-    const commodities = [...new Set(pricesData.map(p => p.commodity_name))];
-    commodities.forEach(c => {
-        const option = document.createElement('option');
-        option.value = c;
-        option.textContent = c;
-        select.appendChild(option);
+function displayTable() {
+  const tbody = document.querySelector('#priceTable tbody');
+  tbody.innerHTML = '';
+
+  // Group by commodity for cheapest highlighting
+  const grouped = {};
+  pricesData.forEach(item => {
+    if (!grouped[item.name]) grouped[item.name] = [];
+    grouped[item.name].push(item);
+  });
+
+  for (const commodity in grouped) {
+    const items = grouped[commodity];
+    let minPrice = Math.min(...items.map(i => parseFloat(i.price) || Infinity));
+
+    items.forEach(i => {
+      const tr = document.createElement('tr');
+      if (parseFloat(i.price) === minPrice) tr.classList.add('cheapest');
+
+      tr.innerHTML = `
+        <td>${i.name}</td>
+        <td>${i.unit || 'N/A'}</td>
+        <td>${i.store || 'Unknown'}</td>
+        <td>${i.price || 'N/A'}</td>
+        <td>${formatDate(i.timestamp)}</td>
+      `;
+      tbody.appendChild(tr);
     });
-    selectedCommodity = commodities[0];
-    select.addEventListener('change', e => {
-        selectedCommodity = e.target.value;
-        updateChart();
-        notifyLowestPrice();
-    });
+  }
 }
 
-// Populate period dropdown
-function populatePeriodSelect() {
-    const periodSelect = document.getElementById('periodSelect');
-    periodSelect.addEventListener('change', e => {
-        selectedPeriod = e.target.value;
-        updateChart();
-    });
+function formatDate(ts) {
+  const d = new Date(ts);
+  return isNaN(d.getTime()) ? 'Unknown' : d.toLocaleString();
 }
 
-// Display price table
-function displayPricesTable() {
-    const tbody = document.querySelector('#pricesTable tbody');
-    tbody.innerHTML = '';
-    const latestPrices = {};
-
-    pricesData.forEach(p => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td>${p.commodity_name}</td>
-            <td>${p.store}</td>
-            <td>${p.price}</td>
-            <td>${p.unit}</td>
-            <td>${new Date(p.timestamp).toLocaleString()}</td>
-        `;
-        tbody.appendChild(row);
-
-        // Track lowest price
-        const key = p.commodity_name;
-        if (!latestPrices[key] || p.price < latestPrices[key].price) {
-            latestPrices[key] = p;
-        }
-    });
-
-    // Highlight cheapest
-    Array.from(tbody.children).forEach(row => {
-        const name = row.children[0].textContent;
-        const price = Number(row.children[2].textContent);
-        if (latestPrices[name] && price === latestPrices[name].price) {
-            row.classList.add('lowest');
-        }
-    });
+function filterTable() {
+  const query = document.getElementById('searchBox').value.toLowerCase();
+  const rows = document.querySelectorAll('#priceTable tbody tr');
+  rows.forEach(row => {
+    row.style.display = row.cells[0].textContent.toLowerCase().includes(query) ? '' : 'none';
+  });
 }
 
-// Aggregate prices for chart
-function aggregatePrices(period='daily') {
-    const filtered = pricesData.filter(p => p.commodity_name === selectedCommodity);
-    const map = {};
-
-    filtered.forEach(p => {
-        const date = new Date(p.timestamp);
-        let key;
-        if(period === 'daily') key = date.toISOString().slice(0,10);
-        if(period === 'weekly') {
-            const week = Math.ceil(date.getDate()/7);
-            key = `${date.getFullYear()}-W${week}`;
-        }
-        if(period === 'monthly') key = `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}`;
-        if(!map[key]) map[key] = [];
-        map[key].push(p.price);
-    });
-
-    const labels = Object.keys(map).sort();
-    const avgPrices = labels.map(l => {
-        const sum = map[l].reduce((a,b)=>a+b,0);
-        return Math.round(sum/map[l].length);
-    });
-
-    return { labels, avgPrices };
-}
-
-// Update Chart.js line chart
-function updateChart() {
-    const data = aggregatePrices(selectedPeriod);
-    const ctx = document.getElementById('priceChart').getContext('2d');
-    if(chart) chart.destroy();
-    chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: data.labels,
-            datasets: [{
-                label: `${selectedCommodity} (${selectedPeriod})`,
-                data: data.avgPrices,
-                borderColor: 'blue',
-                fill: false,
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: { legend: { display: true } },
-            scales: { y: { beginAtZero: false } }
-        }
-    });
-}
-
-// Browser notification for lowest price
-function notifyLowestPrice() {
-    const filtered = pricesData.filter(p => p.commodity_name === selectedCommodity);
-    if(filtered.length === 0) return;
-    const today = new Date().toISOString().slice(0,10);
-    const todayPrices = filtered.filter(p => p.timestamp.startsWith(today));
-    if(todayPrices.length === 0) return;
-
-    const lowest = todayPrices.reduce((a,b) => a.price < b.price ? a : b);
-    if("Notification" in window && Notification.permission === "granted") {
-        new Notification(`Lowest Price Alert!`, {
-            body: `${lowest.commodity_name} at ${lowest.store} is KES ${lowest.price} today.`,
-        });
-    } else if("Notification" in window) {
-        Notification.requestPermission();
+function createChart() {
+  const ctx = document.getElementById('priceChart').getContext('2d');
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [], // timestamps
+      datasets: [] // dynamic per commodity
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'top' }, title: { display: true, text: 'Price Trends' } }
     }
+  });
+  updateChart();
 }
 
-// Initial load
+function updateChart() {
+  const period = document.getElementById('trendPeriod').value;
+  const now = new Date();
+  let cutoff;
+
+  if (period === 'daily') cutoff = new Date(now.getTime() - 24*60*60*1000);
+  else if (period === 'weekly') cutoff = new Date(now.getTime() - 7*24*60*60*1000);
+  else cutoff = new Date(now.getTime() - 30*24*60*60*1000);
+
+  // Build datasets
+  const commodities = [...new Set(pricesData.map(p => p.name))];
+  chart.data.labels = [];
+  chart.data.datasets = commodities.map(name => {
+    const itemData = pricesData
+      .filter(p => p.name === name && new Date(p.timestamp) >= cutoff)
+      .sort((a,b)=>new Date(a.timestamp)-new Date(b.timestamp));
+
+    return {
+      label: name,
+      data: itemData.map(p => ({ x: new Date(p.timestamp), y: parseFloat(p.price) || null })),
+      borderColor: getRandomColor(),
+      fill: false,
+      tension: 0.2
+    };
+  });
+
+  // Collect unique timestamps for x-axis
+  const allTimestamps = new Set();
+  chart.data.datasets.forEach(ds => ds.data.forEach(p=>allTimestamps.add(p.x)));
+  chart.data.labels = Array.from(allTimestamps).sort((a,b)=>a-b).map(d=>new Date(d).toLocaleDateString());
+
+  chart.update();
+}
+
+function getRandomColor() {
+  const r = Math.floor(Math.random()*200);
+  const g = Math.floor(Math.random()*200);
+  const b = Math.floor(Math.random()*200);
+  return `rgb(${r},${g},${b})`;
+}
+
+// Optional browser notification for cheapest item
+function notifyCheapest() {
+  if (!("Notification" in window)) return;
+  if (Notification.permission !== "granted") Notification.requestPermission();
+
+  const cheapestItems = [];
+  const grouped = {};
+  pricesData.forEach(item => {
+    if (!grouped[item.name]) grouped[item.name]=[];
+    grouped[item.name].push(item);
+  });
+
+  for (const c in grouped) {
+    const items = grouped[c];
+    const minPrice = Math.min(...items.map(i=>parseFloat(i.price)||Infinity));
+    const cheapest = items.find(i=>parseFloat(i.price)===minPrice);
+    if (cheapest) cheapestItems.push(`${cheapest.name} @ ${cheapest.price} KES (${cheapest.store})`);
+  }
+
+  if (Notification.permission === "granted") {
+    cheapestItems.forEach(text => new Notification("Cheapest Item", { body: text }));
+  }
+}
+
 loadPrices();
 </script>
-
 </body>
 </html>
