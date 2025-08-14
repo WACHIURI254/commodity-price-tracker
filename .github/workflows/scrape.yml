@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Get full history so we can pull/rebase
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -29,21 +29,15 @@ jobs:
       - name: Run scraper
         run: python scraper.py
 
-      - name: Commit and push updated prices.json
+      - name: Commit and force push updated prices.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
 
-          # Get the latest changes from GitHub
-          git fetch origin main
-          git checkout main
-          git pull --rebase origin main || true
-
-          # Stage and commit if there are changes
           git add prices.json
           git diff --cached --quiet || git commit -m "Update prices"
 
-          # Push changes
-          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git main
+          # Force push to overwrite remote
+          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git main --force
