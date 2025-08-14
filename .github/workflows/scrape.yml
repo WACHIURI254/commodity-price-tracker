@@ -2,42 +2,40 @@ name: Scrape Jumia Prices
 
 on:
   schedule:
-    - cron: "0 */6 * * *" # Every 6 hours
-  workflow_dispatch:
+    - cron: "0 */6 * * *" # every 6 hours
+  workflow_dispatch: # allow manual run
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
+      # Checkout repo
+      - name: Checkout
+        uses: actions/checkout@v4
 
+      # Set up Python
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.11"
 
+      # Install dependencies
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install playwright==1.47.0 playwright-stealth
+          pip install playwright playwright-stealth
           playwright install --with-deps chromium
 
+      # Run scraper
       - name: Run scraper
-        run: python scraper.py
+        run: python jumia_scraper.py
 
-      - name: Commit and force push updated prices.json
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # Commit and force push changes
+      - name: Commit and push changes
         run: |
-          git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
-
+          git config --global user.email "actions@github.com"
           git add prices.json
-          git diff --cached --quiet || git commit -m "Update prices"
-
-          # Force push to overwrite remote
-          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git main --force
+          git commit -m "Update prices [skip ci]" || echo "No changes to commit"
+          git pull --rebase --strategy-option=theirs origin main
+          git push origin main --force
