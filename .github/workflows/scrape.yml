@@ -44,14 +44,24 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           
-          # Check if there are changes
+          # Check if there are changes to commit
           if git diff --quiet && git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git pull origin main --rebase
+            # Add the prices.json file
             git add prices.json
+            
+            # Commit changes
             git commit -m "Update prices - $(date '+%Y-%m-%d %H:%M:%S')"
-            git push origin main
+            
+            # Try to push
+            if ! git push origin main; then
+              echo "Push failed, pulling latest changes first"
+              # Pull latest changes with rebase
+              git pull origin main --rebase
+              # Try pushing again
+              git push origin main
+            fi
           fi
 
       - name: Notify on failure
