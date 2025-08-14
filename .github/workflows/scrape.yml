@@ -8,32 +8,53 @@ on:
 jobs:
   scrape:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 15
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch full history for better merge handling
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
+      - name: Cache Playwright binaries
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-playwright-
+
       - name: Install dependencies
         run: |
+          python -m pip install --upgrade pip
           pip install playwright==1.45.0 playwright-stealth==1.0.6
-          playwright install chromium
-
-      # Pull first so repo is up to date
-      - name: Pull latest changes
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git pull origin main
+          playwright install chromium --with-deps
 
       - name: Run scraper
         run: python scraper.py
+        continue-on-error: true  # Continue even if scraping fails partially
 
       - name: Commit and push if prices.json changed
         run: |
-          git add prices.json
-          git diff --quiet && git diff --staged --quiet || (git commit -m "Update prices" && git push)
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          
+          # Check if there are changes
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git pull origin main --rebase
+            git add prices.json
+            git commit -m "Update prices - $(date '+%Y-%m-%d %H:%M:%S')"
+            git push origin main
+          fi
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "Scraping failed. Check logs for details."
