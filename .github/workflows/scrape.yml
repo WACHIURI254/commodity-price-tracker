@@ -1,45 +1,39 @@
-name: Scrape Jumia Prices
+name: Scrape commodity prices
 
 on:
   schedule:
-    - cron: "0 */6 * * *"  # Every 6 hours
+    - cron: "0 */6 * * *"  # Runs every 6 hours
   workflow_dispatch:
 
-permissions:
-  contents: write  # Required for push
-
 jobs:
-  run:
+  scrape:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0  # Full history so pull works
-        token: ${{ secrets.GITHUB_TOKEN }}  # Authenticate pull/push
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: "3.11"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
-    - name: Install Python dependencies
-      run: |
-        pip install --upgrade pip
-        pip install playwright
-        playwright install chromium
+      - name: Install dependencies
+        run: |
+          pip install playwright==1.45.0 playwright-stealth==1.0.6
+          playwright install chromium
 
-    - name: Run scraper
-      run: python scraper.py
+      # Pull first so repo is up to date
+      - name: Pull latest changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git pull origin main
 
-    - name: Commit and push updated prices.json
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        git config --global user.email "actions@github.com"
-        git config --global user.name "GitHub Actions"
-        git pull --rebase origin main
-        git add prices.json
-        git commit -m "Update prices" || echo "No changes to commit"
-        git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+      - name: Run scraper
+        run: python scraper.py
+
+      - name: Commit and push if prices.json changed
+        run: |
+          git add prices.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update prices" && git push)
