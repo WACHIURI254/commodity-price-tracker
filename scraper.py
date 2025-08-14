@@ -3,9 +3,16 @@ from playwright_stealth import stealth_sync
 import json
 from datetime import datetime
 
+SEARCH_TERMS = [
+    ("sugar", "sugar"),
+    ("maize flour", "maize+flour"),
+    ("rice", "rice")
+]
+
 def scrape_jumia():
+    all_products = []
+
     with sync_playwright() as p:
-        # Launch Chromium in headless mode
         browser = p.chromium.launch(headless=True)
         context = browser.new_context(
             user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -16,40 +23,34 @@ def scrape_jumia():
         )
 
         page = context.new_page()
-
-        # Apply stealth mode to avoid detection
         stealth_sync(page)
 
-        # Go to Jumia search results for Maize Flour
-        page.goto("https://www.jumia.co.ke/catalog/?q=maize+flour", wait_until="domcontentloaded")
+        for label, query in SEARCH_TERMS:
+            print(f"🔍 Scraping prices for {label}...")
 
-        # Wait for products to load
-        page.wait_for_selector(".prd")
+            page.goto(f"https://www.jumia.co.ke/catalog/?q={query}", wait_until="domcontentloaded")
+            page.wait_for_selector(".prd", timeout=10000)
 
-        products = []
-        for product in page.query_selector_all(".prd"):
-            name = product.query_selector(".name")
-            price = product.query_selector(".prc")
+            for product in page.query_selector_all(".prd"):
+                name = product.query_selector(".name")
+                price = product.query_selector(".prc")
 
-            if name and price:
-                products.append({
-                    "store": "Jumia",
-                    "item": name.inner_text().strip(),
-                    "price": price.inner_text().strip(),
-                    "scraped_at": datetime.utcnow().isoformat()
-                })
+                if name and price:
+                    all_products.append({
+                        "store": "Jumia",
+                        "category": label,
+                        "item": name.inner_text().strip(),
+                        "price": price.inner_text().strip(),
+                        "scraped_at": datetime.utcnow().isoformat()
+                    })
 
         browser.close()
 
-        # Save to prices.json
-        with open("prices.json", "w", encoding="utf-8") as f:
-            json.dump(products, f, ensure_ascii=False, indent=2)
+    # Save fresh data, replacing old file
+    with open("prices.json", "w", encoding="utf-8") as f:
+        json.dump(all_products, f, ensure_ascii=False, indent=2)
 
-        # Save count to last_count.txt for GitHub Actions
-        with open("last_count.txt", "w") as f:
-            f.write(str(len(products)))
-
-        print(f"Scraped {len(products)} items from Jumia.")
+    print(f"\n✅ Scraped {len(all_products)} total products from Jumia.")
 
 if __name__ == "__main__":
     scrape_jumia()
