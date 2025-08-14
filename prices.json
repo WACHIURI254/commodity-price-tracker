@@ -5,7 +5,7 @@
     "category": "Staples",
     "canonical_unit": "2kg",
     "store": "Jumia",
-    "item": "Pembe Pembe Maize Meal – 2Kg",
+    "item": "Pembe Pembe Maize Meal \u2013 2Kg",
     "price": 165.0,
     "unit_price": 165.0,
     "product_url": "https://www.jumia.co.ke/pembe-pembe-maize-meal-2kg-43166446.html",
@@ -18,7 +18,7 @@
     "category": "Staples",
     "canonical_unit": "2kg",
     "store": "Jumia",
-    "item": "Soko Maize Meal – 10Kg",
+    "item": "Soko Maize Meal \u2013 10Kg",
     "price": 799.0,
     "unit_price": 799.0,
     "product_url": "https://www.jumia.co.ke/soko-maize-meal-10kg-47995839.html",
@@ -57,7 +57,7 @@
     "category": "Staples",
     "canonical_unit": "2kg",
     "store": "Jumia",
-    "item": "Pembe Pembe Maize Meal – 5Kg",
+    "item": "Pembe Pembe Maize Meal \u2013 5Kg",
     "price": 407.0,
     "unit_price": 407.0,
     "product_url": "https://www.jumia.co.ke/pembe-pembe-maize-meal-5kg-43166447.html",
@@ -304,7 +304,7 @@
     "category": "Staples",
     "canonical_unit": "2kg",
     "store": "Jumia",
-    "item": "Mama Maize Flour – 10kg",
+    "item": "Mama Maize Flour \u2013 10kg",
     "price": 2780.0,
     "unit_price": 2780.0,
     "product_url": "https://www.jumia.co.ke/generic-mama-maize-flour-10kg-325455188.html",
@@ -577,7 +577,7 @@
     "category": "Staples",
     "canonical_unit": "2kg",
     "store": "Jumia",
-    "item": "On Call High Quality Blood Sugar Monitoring Glucometer – Fast & Accurate Diabetes Testing Kit With Easy Forearm/Fingertip Sampling",
+    "item": "On Call High Quality Blood Sugar Monitoring Glucometer \u2013 Fast & Accurate Diabetes Testing Kit With Easy Forearm/Fingertip Sampling",
     "price": 2184.0,
     "unit_price": 2184.0,
     "product_url": "https://www.jumia.co.ke/on-call-high-quality-blood-sugar-monitoring-glucometer-fast-accurate-diabetes-testing-kit-with-easy-forearmfingertip-sampling-317939352.html",
@@ -824,7 +824,7 @@
     "category": "Staples",
     "canonical_unit": "2kg",
     "store": "Jumia",
-    "item": "Sinocare High Quality Sinodraw® Soft Twist Disposable Blood Lancets – Sterile, Single-Use & Compatible with Most Lancing Devices (50pcs)",
+    "item": "Sinocare High Quality Sinodraw\u00ae Soft Twist Disposable Blood Lancets \u2013 Sterile, Single-Use & Compatible with Most Lancing Devices (50pcs)",
     "price": 1140.0,
     "unit_price": 1140.0,
     "product_url": "https://www.jumia.co.ke/sinocare-high-quality-sinodrawr-soft-twist-disposable-blood-lancets-sterile-single-use-compatible-with-most-lancing-devices-50pcs-315805568.html",
@@ -876,7 +876,7 @@
     "category": "Staples",
     "canonical_unit": "2kg",
     "store": "Jumia",
-    "item": "ChatGPT said: 320ml Bamboo Sugar Dish with Matching Teaspoon – Eco-Friendly Wooden Jar for Kitchen, Dining & Coffee Table Use",
+    "item": "ChatGPT said: 320ml Bamboo Sugar Dish with Matching Teaspoon \u2013 Eco-Friendly Wooden Jar for Kitchen, Dining & Coffee Table Use",
     "price": 1140.0,
     "unit_price": 1140.0,
     "product_url": "https://www.jumia.co.ke/generic-chatgpt-said-320ml-bamboo-sugar-dish-with-matching-teaspoon-eco-friendly-wooden-jar-for-kitchen-dining-coffee-table-use-324364413.html",
@@ -1032,7 +1032,7 @@
     "category": "Staples",
     "canonical_unit": "2kg",
     "store": "Jumia",
-    "item": "Cil Cil Pishori Aromatic Rice – 2Kg",
+    "item": "Cil Cil Pishori Aromatic Rice \u2013 2Kg",
     "price": 579.0,
     "unit_price": 579.0,
     "product_url": "https://www.jumia.co.ke/cil-cil-pishori-aromatic-rice-2kg-44101193.html",
@@ -1318,7 +1318,7 @@
     "category": "Staples",
     "canonical_unit": "2kg",
     "store": "Jumia",
-    "item": "Red Clover Tea – Hormonal Balance, Menopause Relief & Natural Detox",
+    "item": "Red Clover Tea \u2013 Hormonal Balance, Menopause Relief & Natural Detox",
     "price": 600.0,
     "unit_price": 600.0,
     "product_url": "https://www.jumia.co.ke/generic-red-clover-tea-hormonal-balance-menopause-relief-natural-detox-310936975.html",
@@ -1370,7 +1370,7 @@
     "category": "Staples",
     "canonical_unit": "2kg",
     "store": "Jumia",
-    "item": "AILYONS Rice Cooker Deluxe 1.8L Automatic Electric 3 In 1 – Silver DRC18S-AVA1",
+    "item": "AILYONS Rice Cooker Deluxe 1.8L Automatic Electric 3 In 1 \u2013 Silver DRC18S-AVA1",
     "price": 3499.0,
     "unit_price": 3499.0,
     "product_url": "https://www.jumia.co.ke/ailyons-rice-cooker-deluxe-1.8l-automatic-electric-3-in-1-silver-drc18s-ava1-309838293.html",
@@ -1428,5 +1428,1755 @@
     "product_url": "https://www.jumia.co.ke/ailyons-hot-and-normal-water-dispenser-with-a-1-year-warrant-and-free-delivery-298231218.html",
     "in_stock": true,
     "scraped_at": "2025-08-14T13:17:13.697739"
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894284",
+    "store": "Naivas",
+    "commodity_name": "Maize flour",
+    "unit": "2 kg",
+    "price": 3783
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894300",
+    "store": "Naivas",
+    "commodity_name": "Wheat flour",
+    "unit": "2 kg",
+    "price": 3066
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894305",
+    "store": "Naivas",
+    "commodity_name": "Rice (long grain)",
+    "unit": "2 kg",
+    "price": 4711
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894309",
+    "store": "Naivas",
+    "commodity_name": "Sugar",
+    "unit": "2 kg",
+    "price": 4011
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894313",
+    "store": "Naivas",
+    "commodity_name": "Cooking oil (vegetable)",
+    "unit": "1 L",
+    "price": 3883
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894317",
+    "store": "Naivas",
+    "commodity_name": "Salt",
+    "unit": "1 kg",
+    "price": 2222
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894320",
+    "store": "Naivas",
+    "commodity_name": "Bread (white/standard)",
+    "unit": "400 g",
+    "price": 1899
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894325",
+    "store": "Naivas",
+    "commodity_name": "Milk (fresh)",
+    "unit": "500 ml",
+    "price": 2547
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894333",
+    "store": "Naivas",
+    "commodity_name": "Eggs",
+    "unit": "tray of 30",
+    "price": 318
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894338",
+    "store": "Naivas",
+    "commodity_name": "Pasta/Spaghetti",
+    "unit": "500 g",
+    "price": 1225
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894341",
+    "store": "Naivas",
+    "commodity_name": "Dry beans",
+    "unit": "1 kg",
+    "price": 3756
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894345",
+    "store": "Naivas",
+    "commodity_name": "Dry maize/unga",
+    "unit": "2 kg",
+    "price": 4174
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894348",
+    "store": "Naivas",
+    "commodity_name": "Green grams (ndengu)",
+    "unit": "1 kg",
+    "price": 2686
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894350",
+    "store": "Naivas",
+    "commodity_name": "Lentils",
+    "unit": "1 kg",
+    "price": 740
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894353",
+    "store": "Naivas",
+    "commodity_name": "Tea leaves",
+    "unit": "250 g",
+    "price": 1269
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894356",
+    "store": "Naivas",
+    "commodity_name": "Instant coffee",
+    "unit": "100 g",
+    "price": 4162
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894359",
+    "store": "Naivas",
+    "commodity_name": "Drinking chocolate/cocoa",
+    "unit": "500 g",
+    "price": 3924
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894362",
+    "store": "Naivas",
+    "commodity_name": "Peanut butter",
+    "unit": "400 g",
+    "price": 1742
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894365",
+    "store": "Naivas",
+    "commodity_name": "Jam (assorted)",
+    "unit": "400 g",
+    "price": 1718
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894368",
+    "store": "Naivas",
+    "commodity_name": "Margarine/butter spread",
+    "unit": "500 g",
+    "price": 4147
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894371",
+    "store": "Naivas",
+    "commodity_name": "Bottled water",
+    "unit": "1.5 L",
+    "price": 4400
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894374",
+    "store": "Naivas",
+    "commodity_name": "Soda (assorted)",
+    "unit": "2 L",
+    "price": 2321
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894377",
+    "store": "Naivas",
+    "commodity_name": "Cooking gas (LPG) 6 kg refill",
+    "unit": "6 kg",
+    "price": 1269
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894380",
+    "store": "Naivas",
+    "commodity_name": "Cooking gas (LPG) 13 kg refill",
+    "unit": "13 kg",
+    "price": 3132
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894382",
+    "store": "Naivas",
+    "commodity_name": "Tomatoes",
+    "unit": "1 kg",
+    "price": 3793
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894385",
+    "store": "Naivas",
+    "commodity_name": "Onions (red)",
+    "unit": "1 kg",
+    "price": 471
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894388",
+    "store": "Naivas",
+    "commodity_name": "Potatoes",
+    "unit": "2 kg",
+    "price": 4213
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894391",
+    "store": "Naivas",
+    "commodity_name": "Carrots",
+    "unit": "1 kg",
+    "price": 218
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894394",
+    "store": "Naivas",
+    "commodity_name": "Cabbage",
+    "unit": "1 head (~1.5\u20132 kg)",
+    "price": 1286
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894397",
+    "store": "Naivas",
+    "commodity_name": "Toilet paper/tissue",
+    "unit": "10 pack",
+    "price": 1754
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894400",
+    "store": "Naivas",
+    "commodity_name": "Laundry detergent powder",
+    "unit": "1 kg",
+    "price": 4210
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894403",
+    "store": "Naivas",
+    "commodity_name": "Dishwashing liquid",
+    "unit": "750 ml",
+    "price": 1534
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894406",
+    "store": "Naivas",
+    "commodity_name": "Bar soap (multipurpose)",
+    "unit": "800 g",
+    "price": 3035
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894409",
+    "store": "Naivas",
+    "commodity_name": "Bathing soap",
+    "unit": "100 g",
+    "price": 2502
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894412",
+    "store": "Naivas",
+    "commodity_name": "Toothpaste",
+    "unit": "100 ml",
+    "price": 728
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894415",
+    "store": "Naivas",
+    "commodity_name": "Toothbrush",
+    "unit": "single",
+    "price": 2143
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894418",
+    "store": "Naivas",
+    "commodity_name": "Sanitary pads",
+    "unit": "regular 10\u201312 pack",
+    "price": 1201
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894424",
+    "store": "Naivas",
+    "commodity_name": "Baby diapers",
+    "unit": "size 3, 56\u201360 pack",
+    "price": 1553
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894428",
+    "store": "Naivas",
+    "commodity_name": "Baby wipes",
+    "unit": "80 sheets",
+    "price": 2887
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894430",
+    "store": "Naivas",
+    "commodity_name": "Petroleum jelly",
+    "unit": "250 ml",
+    "price": 2367
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894433",
+    "store": "Naivas",
+    "commodity_name": "Bleach",
+    "unit": "1 L",
+    "price": 1735
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894436",
+    "store": "Naivas",
+    "commodity_name": "Surface cleaner",
+    "unit": "1 L",
+    "price": 2234
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894439",
+    "store": "Naivas",
+    "commodity_name": "Scouring powder",
+    "unit": "500 g",
+    "price": 4633
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894441",
+    "store": "Naivas",
+    "commodity_name": "Steel wool",
+    "unit": "6 pack",
+    "price": 487
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894444",
+    "store": "Naivas",
+    "commodity_name": "Insecticide spray",
+    "unit": "300 ml",
+    "price": 2097
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894447",
+    "store": "Naivas",
+    "commodity_name": "Matches",
+    "unit": "10 boxes",
+    "price": 634
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894449",
+    "store": "Naivas",
+    "commodity_name": "Candles",
+    "unit": "6 pack",
+    "price": 590
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894452",
+    "store": "Naivas",
+    "commodity_name": "Aluminum foil",
+    "unit": "25 m",
+    "price": 2124
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894455",
+    "store": "Naivas",
+    "commodity_name": "Cling film",
+    "unit": "30 m",
+    "price": 1338
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894457",
+    "store": "Naivas",
+    "commodity_name": "Trash bags",
+    "unit": "medium 30\u201340 L, 30 pack",
+    "price": 1434
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894465",
+    "store": "Quickmart",
+    "commodity_name": "Maize flour",
+    "unit": "2 kg",
+    "price": 2631
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894469",
+    "store": "Quickmart",
+    "commodity_name": "Wheat flour",
+    "unit": "2 kg",
+    "price": 3329
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894472",
+    "store": "Quickmart",
+    "commodity_name": "Rice (long grain)",
+    "unit": "2 kg",
+    "price": 3864
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894474",
+    "store": "Quickmart",
+    "commodity_name": "Sugar",
+    "unit": "2 kg",
+    "price": 4356
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894480",
+    "store": "Quickmart",
+    "commodity_name": "Cooking oil (vegetable)",
+    "unit": "1 L",
+    "price": 838
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894484",
+    "store": "Quickmart",
+    "commodity_name": "Salt",
+    "unit": "1 kg",
+    "price": 1693
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894487",
+    "store": "Quickmart",
+    "commodity_name": "Bread (white/standard)",
+    "unit": "400 g",
+    "price": 324
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894489",
+    "store": "Quickmart",
+    "commodity_name": "Milk (fresh)",
+    "unit": "500 ml",
+    "price": 2764
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894492",
+    "store": "Quickmart",
+    "commodity_name": "Eggs",
+    "unit": "tray of 30",
+    "price": 4237
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894495",
+    "store": "Quickmart",
+    "commodity_name": "Pasta/Spaghetti",
+    "unit": "500 g",
+    "price": 3391
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894498",
+    "store": "Quickmart",
+    "commodity_name": "Dry beans",
+    "unit": "1 kg",
+    "price": 2225
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894501",
+    "store": "Quickmart",
+    "commodity_name": "Dry maize/unga",
+    "unit": "2 kg",
+    "price": 4956
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894504",
+    "store": "Quickmart",
+    "commodity_name": "Green grams (ndengu)",
+    "unit": "1 kg",
+    "price": 1092
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894507",
+    "store": "Quickmart",
+    "commodity_name": "Lentils",
+    "unit": "1 kg",
+    "price": 2078
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894510",
+    "store": "Quickmart",
+    "commodity_name": "Tea leaves",
+    "unit": "250 g",
+    "price": 1368
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894513",
+    "store": "Quickmart",
+    "commodity_name": "Instant coffee",
+    "unit": "100 g",
+    "price": 585
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894516",
+    "store": "Quickmart",
+    "commodity_name": "Drinking chocolate/cocoa",
+    "unit": "500 g",
+    "price": 4720
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894519",
+    "store": "Quickmart",
+    "commodity_name": "Peanut butter",
+    "unit": "400 g",
+    "price": 2624
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894522",
+    "store": "Quickmart",
+    "commodity_name": "Jam (assorted)",
+    "unit": "400 g",
+    "price": 1928
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894525",
+    "store": "Quickmart",
+    "commodity_name": "Margarine/butter spread",
+    "unit": "500 g",
+    "price": 1656
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894527",
+    "store": "Quickmart",
+    "commodity_name": "Bottled water",
+    "unit": "1.5 L",
+    "price": 4352
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894530",
+    "store": "Quickmart",
+    "commodity_name": "Soda (assorted)",
+    "unit": "2 L",
+    "price": 4571
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894533",
+    "store": "Quickmart",
+    "commodity_name": "Cooking gas (LPG) 6 kg refill",
+    "unit": "6 kg",
+    "price": 3097
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894536",
+    "store": "Quickmart",
+    "commodity_name": "Cooking gas (LPG) 13 kg refill",
+    "unit": "13 kg",
+    "price": 4862
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894539",
+    "store": "Quickmart",
+    "commodity_name": "Tomatoes",
+    "unit": "1 kg",
+    "price": 2810
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894541",
+    "store": "Quickmart",
+    "commodity_name": "Onions (red)",
+    "unit": "1 kg",
+    "price": 1080
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894544",
+    "store": "Quickmart",
+    "commodity_name": "Potatoes",
+    "unit": "2 kg",
+    "price": 982
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894547",
+    "store": "Quickmart",
+    "commodity_name": "Carrots",
+    "unit": "1 kg",
+    "price": 2970
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894550",
+    "store": "Quickmart",
+    "commodity_name": "Cabbage",
+    "unit": "1 head (~1.5\u20132 kg)",
+    "price": 812
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894553",
+    "store": "Quickmart",
+    "commodity_name": "Toilet paper/tissue",
+    "unit": "10 pack",
+    "price": 1290
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894556",
+    "store": "Quickmart",
+    "commodity_name": "Laundry detergent powder",
+    "unit": "1 kg",
+    "price": 584
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894558",
+    "store": "Quickmart",
+    "commodity_name": "Dishwashing liquid",
+    "unit": "750 ml",
+    "price": 4421
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894561",
+    "store": "Quickmart",
+    "commodity_name": "Bar soap (multipurpose)",
+    "unit": "800 g",
+    "price": 3606
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894564",
+    "store": "Quickmart",
+    "commodity_name": "Bathing soap",
+    "unit": "100 g",
+    "price": 2183
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894566",
+    "store": "Quickmart",
+    "commodity_name": "Toothpaste",
+    "unit": "100 ml",
+    "price": 2405
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894568",
+    "store": "Quickmart",
+    "commodity_name": "Toothbrush",
+    "unit": "single",
+    "price": 4156
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894571",
+    "store": "Quickmart",
+    "commodity_name": "Sanitary pads",
+    "unit": "regular 10\u201312 pack",
+    "price": 70
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894573",
+    "store": "Quickmart",
+    "commodity_name": "Baby diapers",
+    "unit": "size 3, 56\u201360 pack",
+    "price": 4370
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894576",
+    "store": "Quickmart",
+    "commodity_name": "Baby wipes",
+    "unit": "80 sheets",
+    "price": 4372
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894579",
+    "store": "Quickmart",
+    "commodity_name": "Petroleum jelly",
+    "unit": "250 ml",
+    "price": 3233
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894581",
+    "store": "Quickmart",
+    "commodity_name": "Bleach",
+    "unit": "1 L",
+    "price": 724
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894584",
+    "store": "Quickmart",
+    "commodity_name": "Surface cleaner",
+    "unit": "1 L",
+    "price": 3659
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894587",
+    "store": "Quickmart",
+    "commodity_name": "Scouring powder",
+    "unit": "500 g",
+    "price": 735
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894589",
+    "store": "Quickmart",
+    "commodity_name": "Steel wool",
+    "unit": "6 pack",
+    "price": 2985
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894592",
+    "store": "Quickmart",
+    "commodity_name": "Insecticide spray",
+    "unit": "300 ml",
+    "price": 3174
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894594",
+    "store": "Quickmart",
+    "commodity_name": "Matches",
+    "unit": "10 boxes",
+    "price": 3222
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894596",
+    "store": "Quickmart",
+    "commodity_name": "Candles",
+    "unit": "6 pack",
+    "price": 616
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894599",
+    "store": "Quickmart",
+    "commodity_name": "Aluminum foil",
+    "unit": "25 m",
+    "price": 4638
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894602",
+    "store": "Quickmart",
+    "commodity_name": "Cling film",
+    "unit": "30 m",
+    "price": 1623
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894604",
+    "store": "Quickmart",
+    "commodity_name": "Trash bags",
+    "unit": "medium 30\u201340 L, 30 pack",
+    "price": 3366
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894611",
+    "store": "Carrefour",
+    "commodity_name": "Maize flour",
+    "unit": "2 kg",
+    "price": 3437
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894614",
+    "store": "Carrefour",
+    "commodity_name": "Wheat flour",
+    "unit": "2 kg",
+    "price": 1458
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894617",
+    "store": "Carrefour",
+    "commodity_name": "Rice (long grain)",
+    "unit": "2 kg",
+    "price": 595
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894620",
+    "store": "Carrefour",
+    "commodity_name": "Sugar",
+    "unit": "2 kg",
+    "price": 244
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894623",
+    "store": "Carrefour",
+    "commodity_name": "Cooking oil (vegetable)",
+    "unit": "1 L",
+    "price": 4473
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894626",
+    "store": "Carrefour",
+    "commodity_name": "Salt",
+    "unit": "1 kg",
+    "price": 2124
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894633",
+    "store": "Carrefour",
+    "commodity_name": "Bread (white/standard)",
+    "unit": "400 g",
+    "price": 2961
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894636",
+    "store": "Carrefour",
+    "commodity_name": "Milk (fresh)",
+    "unit": "500 ml",
+    "price": 1148
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894639",
+    "store": "Carrefour",
+    "commodity_name": "Eggs",
+    "unit": "tray of 30",
+    "price": 3609
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894642",
+    "store": "Carrefour",
+    "commodity_name": "Pasta/Spaghetti",
+    "unit": "500 g",
+    "price": 3756
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894644",
+    "store": "Carrefour",
+    "commodity_name": "Dry beans",
+    "unit": "1 kg",
+    "price": 252
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894647",
+    "store": "Carrefour",
+    "commodity_name": "Dry maize/unga",
+    "unit": "2 kg",
+    "price": 3243
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894650",
+    "store": "Carrefour",
+    "commodity_name": "Green grams (ndengu)",
+    "unit": "1 kg",
+    "price": 1977
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894653",
+    "store": "Carrefour",
+    "commodity_name": "Lentils",
+    "unit": "1 kg",
+    "price": 130
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894656",
+    "store": "Carrefour",
+    "commodity_name": "Tea leaves",
+    "unit": "250 g",
+    "price": 4912
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894659",
+    "store": "Carrefour",
+    "commodity_name": "Instant coffee",
+    "unit": "100 g",
+    "price": 2384
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894661",
+    "store": "Carrefour",
+    "commodity_name": "Drinking chocolate/cocoa",
+    "unit": "500 g",
+    "price": 763
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894664",
+    "store": "Carrefour",
+    "commodity_name": "Peanut butter",
+    "unit": "400 g",
+    "price": 3887
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894667",
+    "store": "Carrefour",
+    "commodity_name": "Jam (assorted)",
+    "unit": "400 g",
+    "price": 1440
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894670",
+    "store": "Carrefour",
+    "commodity_name": "Margarine/butter spread",
+    "unit": "500 g",
+    "price": 4645
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894672",
+    "store": "Carrefour",
+    "commodity_name": "Bottled water",
+    "unit": "1.5 L",
+    "price": 2178
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894675",
+    "store": "Carrefour",
+    "commodity_name": "Soda (assorted)",
+    "unit": "2 L",
+    "price": 2486
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894678",
+    "store": "Carrefour",
+    "commodity_name": "Cooking gas (LPG) 6 kg refill",
+    "unit": "6 kg",
+    "price": 3659
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894681",
+    "store": "Carrefour",
+    "commodity_name": "Cooking gas (LPG) 13 kg refill",
+    "unit": "13 kg",
+    "price": 947
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894683",
+    "store": "Carrefour",
+    "commodity_name": "Tomatoes",
+    "unit": "1 kg",
+    "price": 3525
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894686",
+    "store": "Carrefour",
+    "commodity_name": "Onions (red)",
+    "unit": "1 kg",
+    "price": 365
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894689",
+    "store": "Carrefour",
+    "commodity_name": "Potatoes",
+    "unit": "2 kg",
+    "price": 4650
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894691",
+    "store": "Carrefour",
+    "commodity_name": "Carrots",
+    "unit": "1 kg",
+    "price": 1926
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894694",
+    "store": "Carrefour",
+    "commodity_name": "Cabbage",
+    "unit": "1 head (~1.5\u20132 kg)",
+    "price": 1343
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894697",
+    "store": "Carrefour",
+    "commodity_name": "Toilet paper/tissue",
+    "unit": "10 pack",
+    "price": 2445
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894700",
+    "store": "Carrefour",
+    "commodity_name": "Laundry detergent powder",
+    "unit": "1 kg",
+    "price": 4951
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894703",
+    "store": "Carrefour",
+    "commodity_name": "Dishwashing liquid",
+    "unit": "750 ml",
+    "price": 4372
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894706",
+    "store": "Carrefour",
+    "commodity_name": "Bar soap (multipurpose)",
+    "unit": "800 g",
+    "price": 1157
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894709",
+    "store": "Carrefour",
+    "commodity_name": "Bathing soap",
+    "unit": "100 g",
+    "price": 3974
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894712",
+    "store": "Carrefour",
+    "commodity_name": "Toothpaste",
+    "unit": "100 ml",
+    "price": 478
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894715",
+    "store": "Carrefour",
+    "commodity_name": "Toothbrush",
+    "unit": "single",
+    "price": 3152
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894717",
+    "store": "Carrefour",
+    "commodity_name": "Sanitary pads",
+    "unit": "regular 10\u201312 pack",
+    "price": 1364
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894720",
+    "store": "Carrefour",
+    "commodity_name": "Baby diapers",
+    "unit": "size 3, 56\u201360 pack",
+    "price": 4384
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894723",
+    "store": "Carrefour",
+    "commodity_name": "Baby wipes",
+    "unit": "80 sheets",
+    "price": 3925
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894726",
+    "store": "Carrefour",
+    "commodity_name": "Petroleum jelly",
+    "unit": "250 ml",
+    "price": 1930
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894729",
+    "store": "Carrefour",
+    "commodity_name": "Bleach",
+    "unit": "1 L",
+    "price": 1179
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894732",
+    "store": "Carrefour",
+    "commodity_name": "Surface cleaner",
+    "unit": "1 L",
+    "price": 3815
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894734",
+    "store": "Carrefour",
+    "commodity_name": "Scouring powder",
+    "unit": "500 g",
+    "price": 3127
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894737",
+    "store": "Carrefour",
+    "commodity_name": "Steel wool",
+    "unit": "6 pack",
+    "price": 1109
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894740",
+    "store": "Carrefour",
+    "commodity_name": "Insecticide spray",
+    "unit": "300 ml",
+    "price": 2543
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894743",
+    "store": "Carrefour",
+    "commodity_name": "Matches",
+    "unit": "10 boxes",
+    "price": 3471
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894745",
+    "store": "Carrefour",
+    "commodity_name": "Candles",
+    "unit": "6 pack",
+    "price": 3371
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894748",
+    "store": "Carrefour",
+    "commodity_name": "Aluminum foil",
+    "unit": "25 m",
+    "price": 4787
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894751",
+    "store": "Carrefour",
+    "commodity_name": "Cling film",
+    "unit": "30 m",
+    "price": 405
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894753",
+    "store": "Carrefour",
+    "commodity_name": "Trash bags",
+    "unit": "medium 30\u201340 L, 30 pack",
+    "price": 3081
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894761",
+    "store": "Jumia",
+    "commodity_name": "Maize flour",
+    "unit": "2 kg",
+    "price": 1968
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894764",
+    "store": "Jumia",
+    "commodity_name": "Wheat flour",
+    "unit": "2 kg",
+    "price": 3238
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894767",
+    "store": "Jumia",
+    "commodity_name": "Rice (long grain)",
+    "unit": "2 kg",
+    "price": 2883
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894770",
+    "store": "Jumia",
+    "commodity_name": "Sugar",
+    "unit": "2 kg",
+    "price": 3415
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894773",
+    "store": "Jumia",
+    "commodity_name": "Cooking oil (vegetable)",
+    "unit": "1 L",
+    "price": 2745
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894775",
+    "store": "Jumia",
+    "commodity_name": "Salt",
+    "unit": "1 kg",
+    "price": 4314
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894782",
+    "store": "Jumia",
+    "commodity_name": "Bread (white/standard)",
+    "unit": "400 g",
+    "price": 3217
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894784",
+    "store": "Jumia",
+    "commodity_name": "Milk (fresh)",
+    "unit": "500 ml",
+    "price": 4143
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894787",
+    "store": "Jumia",
+    "commodity_name": "Eggs",
+    "unit": "tray of 30",
+    "price": 2918
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894789",
+    "store": "Jumia",
+    "commodity_name": "Pasta/Spaghetti",
+    "unit": "500 g",
+    "price": 3767
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894792",
+    "store": "Jumia",
+    "commodity_name": "Dry beans",
+    "unit": "1 kg",
+    "price": 658
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894794",
+    "store": "Jumia",
+    "commodity_name": "Dry maize/unga",
+    "unit": "2 kg",
+    "price": 146
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894797",
+    "store": "Jumia",
+    "commodity_name": "Green grams (ndengu)",
+    "unit": "1 kg",
+    "price": 541
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894799",
+    "store": "Jumia",
+    "commodity_name": "Lentils",
+    "unit": "1 kg",
+    "price": 538
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894802",
+    "store": "Jumia",
+    "commodity_name": "Tea leaves",
+    "unit": "250 g",
+    "price": 3195
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894804",
+    "store": "Jumia",
+    "commodity_name": "Instant coffee",
+    "unit": "100 g",
+    "price": 722
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894807",
+    "store": "Jumia",
+    "commodity_name": "Drinking chocolate/cocoa",
+    "unit": "500 g",
+    "price": 533
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894809",
+    "store": "Jumia",
+    "commodity_name": "Peanut butter",
+    "unit": "400 g",
+    "price": 485
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894814",
+    "store": "Jumia",
+    "commodity_name": "Jam (assorted)",
+    "unit": "400 g",
+    "price": 2552
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894817",
+    "store": "Jumia",
+    "commodity_name": "Margarine/butter spread",
+    "unit": "500 g",
+    "price": 4803
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894819",
+    "store": "Jumia",
+    "commodity_name": "Bottled water",
+    "unit": "1.5 L",
+    "price": 468
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894821",
+    "store": "Jumia",
+    "commodity_name": "Soda (assorted)",
+    "unit": "2 L",
+    "price": 3684
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894824",
+    "store": "Jumia",
+    "commodity_name": "Cooking gas (LPG) 6 kg refill",
+    "unit": "6 kg",
+    "price": 1841
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894826",
+    "store": "Jumia",
+    "commodity_name": "Cooking gas (LPG) 13 kg refill",
+    "unit": "13 kg",
+    "price": 4644
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894829",
+    "store": "Jumia",
+    "commodity_name": "Tomatoes",
+    "unit": "1 kg",
+    "price": 3479
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894832",
+    "store": "Jumia",
+    "commodity_name": "Onions (red)",
+    "unit": "1 kg",
+    "price": 2373
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894835",
+    "store": "Jumia",
+    "commodity_name": "Potatoes",
+    "unit": "2 kg",
+    "price": 3914
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894838",
+    "store": "Jumia",
+    "commodity_name": "Carrots",
+    "unit": "1 kg",
+    "price": 671
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894840",
+    "store": "Jumia",
+    "commodity_name": "Cabbage",
+    "unit": "1 head (~1.5\u20132 kg)",
+    "price": 1414
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894843",
+    "store": "Jumia",
+    "commodity_name": "Toilet paper/tissue",
+    "unit": "10 pack",
+    "price": 1583
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894845",
+    "store": "Jumia",
+    "commodity_name": "Laundry detergent powder",
+    "unit": "1 kg",
+    "price": 559
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894848",
+    "store": "Jumia",
+    "commodity_name": "Dishwashing liquid",
+    "unit": "750 ml",
+    "price": 254
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894851",
+    "store": "Jumia",
+    "commodity_name": "Bar soap (multipurpose)",
+    "unit": "800 g",
+    "price": 2931
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894854",
+    "store": "Jumia",
+    "commodity_name": "Bathing soap",
+    "unit": "100 g",
+    "price": 3543
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894857",
+    "store": "Jumia",
+    "commodity_name": "Toothpaste",
+    "unit": "100 ml",
+    "price": 3903
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894859",
+    "store": "Jumia",
+    "commodity_name": "Toothbrush",
+    "unit": "single",
+    "price": 458
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894862",
+    "store": "Jumia",
+    "commodity_name": "Sanitary pads",
+    "unit": "regular 10\u201312 pack",
+    "price": 4654
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894865",
+    "store": "Jumia",
+    "commodity_name": "Baby diapers",
+    "unit": "size 3, 56\u201360 pack",
+    "price": 602
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894868",
+    "store": "Jumia",
+    "commodity_name": "Baby wipes",
+    "unit": "80 sheets",
+    "price": 2995
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894871",
+    "store": "Jumia",
+    "commodity_name": "Petroleum jelly",
+    "unit": "250 ml",
+    "price": 4308
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894874",
+    "store": "Jumia",
+    "commodity_name": "Bleach",
+    "unit": "1 L",
+    "price": 498
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894876",
+    "store": "Jumia",
+    "commodity_name": "Surface cleaner",
+    "unit": "1 L",
+    "price": 3111
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894879",
+    "store": "Jumia",
+    "commodity_name": "Scouring powder",
+    "unit": "500 g",
+    "price": 4740
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894882",
+    "store": "Jumia",
+    "commodity_name": "Steel wool",
+    "unit": "6 pack",
+    "price": 2029
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894885",
+    "store": "Jumia",
+    "commodity_name": "Insecticide spray",
+    "unit": "300 ml",
+    "price": 1324
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894888",
+    "store": "Jumia",
+    "commodity_name": "Matches",
+    "unit": "10 boxes",
+    "price": 3183
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894891",
+    "store": "Jumia",
+    "commodity_name": "Candles",
+    "unit": "6 pack",
+    "price": 633
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894894",
+    "store": "Jumia",
+    "commodity_name": "Aluminum foil",
+    "unit": "25 m",
+    "price": 1302
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894897",
+    "store": "Jumia",
+    "commodity_name": "Cling film",
+    "unit": "30 m",
+    "price": 3783
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894900",
+    "store": "Jumia",
+    "commodity_name": "Trash bags",
+    "unit": "medium 30\u201340 L, 30 pack",
+    "price": 4423
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894908",
+    "store": "Greenspoon",
+    "commodity_name": "Maize flour",
+    "unit": "2 kg",
+    "price": 4096
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894911",
+    "store": "Greenspoon",
+    "commodity_name": "Wheat flour",
+    "unit": "2 kg",
+    "price": 648
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894914",
+    "store": "Greenspoon",
+    "commodity_name": "Rice (long grain)",
+    "unit": "2 kg",
+    "price": 4130
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894916",
+    "store": "Greenspoon",
+    "commodity_name": "Sugar",
+    "unit": "2 kg",
+    "price": 912
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894919",
+    "store": "Greenspoon",
+    "commodity_name": "Cooking oil (vegetable)",
+    "unit": "1 L",
+    "price": 1691
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894922",
+    "store": "Greenspoon",
+    "commodity_name": "Salt",
+    "unit": "1 kg",
+    "price": 2535
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894925",
+    "store": "Greenspoon",
+    "commodity_name": "Bread (white/standard)",
+    "unit": "400 g",
+    "price": 3381
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894931",
+    "store": "Greenspoon",
+    "commodity_name": "Milk (fresh)",
+    "unit": "500 ml",
+    "price": 2767
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894934",
+    "store": "Greenspoon",
+    "commodity_name": "Eggs",
+    "unit": "tray of 30",
+    "price": 4212
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894937",
+    "store": "Greenspoon",
+    "commodity_name": "Pasta/Spaghetti",
+    "unit": "500 g",
+    "price": 3653
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894939",
+    "store": "Greenspoon",
+    "commodity_name": "Dry beans",
+    "unit": "1 kg",
+    "price": 3618
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894942",
+    "store": "Greenspoon",
+    "commodity_name": "Dry maize/unga",
+    "unit": "2 kg",
+    "price": 2195
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894944",
+    "store": "Greenspoon",
+    "commodity_name": "Green grams (ndengu)",
+    "unit": "1 kg",
+    "price": 3199
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894947",
+    "store": "Greenspoon",
+    "commodity_name": "Lentils",
+    "unit": "1 kg",
+    "price": 4634
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894949",
+    "store": "Greenspoon",
+    "commodity_name": "Tea leaves",
+    "unit": "250 g",
+    "price": 2717
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894952",
+    "store": "Greenspoon",
+    "commodity_name": "Instant coffee",
+    "unit": "100 g",
+    "price": 785
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894954",
+    "store": "Greenspoon",
+    "commodity_name": "Drinking chocolate/cocoa",
+    "unit": "500 g",
+    "price": 4646
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894959",
+    "store": "Greenspoon",
+    "commodity_name": "Peanut butter",
+    "unit": "400 g",
+    "price": 4906
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894962",
+    "store": "Greenspoon",
+    "commodity_name": "Jam (assorted)",
+    "unit": "400 g",
+    "price": 675
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894964",
+    "store": "Greenspoon",
+    "commodity_name": "Margarine/butter spread",
+    "unit": "500 g",
+    "price": 919
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894967",
+    "store": "Greenspoon",
+    "commodity_name": "Bottled water",
+    "unit": "1.5 L",
+    "price": 2212
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894969",
+    "store": "Greenspoon",
+    "commodity_name": "Soda (assorted)",
+    "unit": "2 L",
+    "price": 3920
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894972",
+    "store": "Greenspoon",
+    "commodity_name": "Cooking gas (LPG) 6 kg refill",
+    "unit": "6 kg",
+    "price": 3611
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894974",
+    "store": "Greenspoon",
+    "commodity_name": "Cooking gas (LPG) 13 kg refill",
+    "unit": "13 kg",
+    "price": 3465
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894977",
+    "store": "Greenspoon",
+    "commodity_name": "Tomatoes",
+    "unit": "1 kg",
+    "price": 535
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894980",
+    "store": "Greenspoon",
+    "commodity_name": "Onions (red)",
+    "unit": "1 kg",
+    "price": 1546
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894982",
+    "store": "Greenspoon",
+    "commodity_name": "Potatoes",
+    "unit": "2 kg",
+    "price": 161
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894986",
+    "store": "Greenspoon",
+    "commodity_name": "Carrots",
+    "unit": "1 kg",
+    "price": 1847
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894988",
+    "store": "Greenspoon",
+    "commodity_name": "Cabbage",
+    "unit": "1 head (~1.5\u20132 kg)",
+    "price": 2552
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.894991",
+    "store": "Greenspoon",
+    "commodity_name": "Toilet paper/tissue",
+    "unit": "10 pack",
+    "price": 2569
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.895017",
+    "store": "Greenspoon",
+    "commodity_name": "Laundry detergent powder",
+    "unit": "1 kg",
+    "price": 4688
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.895020",
+    "store": "Greenspoon",
+    "commodity_name": "Dishwashing liquid",
+    "unit": "750 ml",
+    "price": 3513
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.895023",
+    "store": "Greenspoon",
+    "commodity_name": "Bar soap (multipurpose)",
+    "unit": "800 g",
+    "price": 2641
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.895026",
+    "store": "Greenspoon",
+    "commodity_name": "Bathing soap",
+    "unit": "100 g",
+    "price": 2865
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.895029",
+    "store": "Greenspoon",
+    "commodity_name": "Toothpaste",
+    "unit": "100 ml",
+    "price": 2816
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.895031",
+    "store": "Greenspoon",
+    "commodity_name": "Toothbrush",
+    "unit": "single",
+    "price": 2812
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.895034",
+    "store": "Greenspoon",
+    "commodity_name": "Sanitary pads",
+    "unit": "regular 10\u201312 pack",
+    "price": 3100
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.895037",
+    "store": "Greenspoon",
+    "commodity_name": "Baby diapers",
+    "unit": "size 3, 56\u201360 pack",
+    "price": 3951
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.895039",
+    "store": "Greenspoon",
+    "commodity_name": "Baby wipes",
+    "unit": "80 sheets",
+    "price": 4956
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.895042",
+    "store": "Greenspoon",
+    "commodity_name": "Petroleum jelly",
+    "unit": "250 ml",
+    "price": 865
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.895045",
+    "store": "Greenspoon",
+    "commodity_name": "Bleach",
+    "unit": "1 L",
+    "price": 3123
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.895048",
+    "store": "Greenspoon",
+    "commodity_name": "Surface cleaner",
+    "unit": "1 L",
+    "price": 2357
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.895051",
+    "store": "Greenspoon",
+    "commodity_name": "Scouring powder",
+    "unit": "500 g",
+    "price": 2400
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.895053",
+    "store": "Greenspoon",
+    "commodity_name": "Steel wool",
+    "unit": "6 pack",
+    "price": 1553
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.895056",
+    "store": "Greenspoon",
+    "commodity_name": "Insecticide spray",
+    "unit": "300 ml",
+    "price": 166
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.895059",
+    "store": "Greenspoon",
+    "commodity_name": "Matches",
+    "unit": "10 boxes",
+    "price": 696
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.895062",
+    "store": "Greenspoon",
+    "commodity_name": "Candles",
+    "unit": "6 pack",
+    "price": 4744
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.895064",
+    "store": "Greenspoon",
+    "commodity_name": "Aluminum foil",
+    "unit": "25 m",
+    "price": 4342
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.895067",
+    "store": "Greenspoon",
+    "commodity_name": "Cling film",
+    "unit": "30 m",
+    "price": 88
+  },
+  {
+    "timestamp": "2025-08-14T14:38:39.895070",
+    "store": "Greenspoon",
+    "commodity_name": "Trash bags",
+    "unit": "medium 30\u201340 L, 30 pack",
+    "price": 4360
   }
 ]
