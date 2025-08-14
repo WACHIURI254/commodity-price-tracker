@@ -45,6 +45,10 @@ def scrape_jumia():
         with open("prices.json", "w", encoding="utf-8") as f:
             json.dump(products, f, ensure_ascii=False, indent=2)
 
+        # Save count to last_count.txt for GitHub Actions
+        with open("last_count.txt", "w") as f:
+            f.write(str(len(products)))
+
         print(f"Scraped {len(products)} items from Jumia.")
 
 if __name__ == "__main__":
