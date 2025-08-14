@@ -13,6 +13,8 @@ jobs:
       # Checkout repo
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # important for pull/rebase
 
       # Set up Python
       - name: Set up Python
@@ -30,12 +32,12 @@ jobs:
       - name: Run scraper
         run: python scraper.py
 
-      # Commit and force push changes
+      # Commit and push changes
       - name: Commit and push changes
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
+          git pull origin main --rebase --strategy-option=theirs
           git add prices.json
           git commit -m "Update prices [skip ci]" || echo "No changes to commit"
-          git pull --rebase --strategy-option=theirs origin main
-          git push origin main --force
+          git push origin main
