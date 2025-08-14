@@ -3,34 +3,31 @@ name: Scrape Jumia Prices
 on:
   schedule:
     - cron: "0 */6 * * *" # every 6 hours
-  workflow_dispatch: # allow manual run
+  workflow_dispatch:
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout repo
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required so we can pull/rebase
 
-      # Set up Python
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      # Install dependencies
       - name: Install dependencies
         run: |
           pip install playwright playwright-stealth
           playwright install --with-deps chromium
 
-      # Run scraper
       - name: Run scraper
         run: python scraper.py
 
-      # Commit and push changes (only if file changed)
       - name: Commit and push if changes
         run: |
           git config --global user.name "GitHub Actions"
@@ -43,3 +40,4 @@ jobs:
             git pull --rebase origin main
             git push origin main
           fi
+
