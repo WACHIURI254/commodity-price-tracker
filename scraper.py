@@ -1,12 +1,10 @@
 # scraper.py
 import json
-import os
 from datetime import datetime
+from pathlib import Path
 from playwright.sync_api import sync_playwright
 
-# ----------------------
-# Configuration
-# ----------------------
+# Canonical list of 50 commodities with units
 COMMODITIES = [
     {"name": "Maize flour", "unit": "2 kg"},
     {"name": "Wheat flour", "unit": "2 kg"},
@@ -44,8 +42,8 @@ COMMODITIES = [
     {"name": "Bathing soap", "unit": "100 g"},
     {"name": "Toothpaste", "unit": "100 ml"},
     {"name": "Toothbrush", "unit": "single"},
-    {"name": "Sanitary pads", "unit": "regular 10–12 pack"},
-    {"name": "Baby diapers", "unit": "size 3, 56–60 pack"},
+    {"name": "Sanitary pads", "unit": "10–12 pack"},
+    {"name": "Baby diapers", "unit": "56–60 pack"},
     {"name": "Baby wipes", "unit": "80 sheets"},
     {"name": "Petroleum jelly", "unit": "250 ml"},
     {"name": "Bleach", "unit": "1 L"},
@@ -57,9 +55,10 @@ COMMODITIES = [
     {"name": "Candles", "unit": "6 pack"},
     {"name": "Aluminum foil", "unit": "25 m"},
     {"name": "Cling film", "unit": "30 m"},
-    {"name": "Trash bags", "unit": "medium 30–40 L, 30 pack"},
+    {"name": "Trash bags", "unit": "30–40 L, 30 pack"},
 ]
 
+# Online stores to scrape
 STORES = [
     {"name": "Naivas", "url": "https://naivas.online/"},
     {"name": "Quickmart", "url": "https://www.quickmart.co.ke/"},
@@ -68,54 +67,57 @@ STORES = [
     {"name": "Greenspoon", "url": "https://greenspoon.co.ke/"}
 ]
 
-OUTPUT_FILE = "prices.json"
+OUTPUT_FILE = Path("prices.json")
 
-# ----------------------
-# Helper Functions
-# ----------------------
-def load_historical_prices():
-    if os.path.exists(OUTPUT_FILE):
-        with open(OUTPUT_FILE, "r") as f:
-            return json.load(f)
-    return []
-
-def save_prices(prices):
-    with open(OUTPUT_FILE, "w") as f:
-        json.dump(prices, f, indent=2)
-
-def scrape_store(store_name, store_url):
-    # Placeholder for real scraping logic
-    # Replace with Playwright scraping per store
-    from random import randint
-    scraped_prices = []
-    for c in COMMODITIES:
-        scraped_prices.append({
-            "timestamp": datetime.now().isoformat(),
+def scrape_store(page, store_name, store_url):
+    """Scrape prices for all commodities from a store (simplified version)."""
+    results = []
+    page.goto(store_url, timeout=60000)
+    
+    # TODO: Replace this with real search logic per store
+    for item in COMMODITIES:
+        # Dummy example: random price (replace with real scraping logic)
+        import random
+        price = random.randint(100, 1000)
+        timestamp = datetime.utcnow().isoformat()
+        results.append({
+            "name": item["name"],
+            "unit": item["unit"],
             "store": store_name,
-            "commodity_name": c["name"],
-            "unit": c["unit"],
-            "price": randint(50, 5000)  # simulate a price
+            "price": price,
+            "timestamp": timestamp
         })
-    return scraped_prices
+    return results
 
-# ----------------------
-# Main Scraper
-# ----------------------
 def main():
-    historical_prices = load_historical_prices()
-    all_prices_today = []
-
+    all_prices = []
     with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        page = browser.new_page()
         for store in STORES:
-            store_prices = scrape_store(store['name'], store['url'])
-            all_prices_today.extend(store_prices)
+            print(f"Scraping {store['name']}...")
+            store_prices = scrape_store(page, store["name"], store["url"])
+            all_prices.extend(store_prices)
+        browser.close()
+    
+    # Load historical data if exists
+    if OUTPUT_FILE.exists():
+        with open(OUTPUT_FILE, "r") as f:
+            historical_data = json.load(f)
+    else:
+        historical_data = []
 
-    # Append new prices to historical data
-    historical_prices.extend(all_prices_today)
+    # Append today's prices
+    historical_data.append({
+        "date": datetime.utcnow().date().isoformat(),
+        "prices": all_prices
+    })
 
     # Save updated historical data
-    save_prices(historical_prices)
-    print(f"Scraped and saved {len(all_prices_today)} prices.")
+    with open(OUTPUT_FILE, "w") as f:
+        json.dump(historical_data, f, indent=2)
+    
+    print(f"Scraping complete. Data saved to {OUTPUT_FILE}")
 
 if __name__ == "__main__":
     main()
