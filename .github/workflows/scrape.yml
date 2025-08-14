@@ -13,8 +13,6 @@ jobs:
       # Checkout repo
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # needed for rebase
 
       # Set up Python
       - name: Set up Python
@@ -32,19 +30,16 @@ jobs:
       - name: Run scraper
         run: python scraper.py
 
-      # Commit and push changes
-      - name: Commit and push changes
+      # Commit and push changes (only if file changed)
+      - name: Commit and push if changes
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git pull origin main --rebase --strategy-option=theirs
-          git add prices.json last_count.txt
-          
-          COUNT=$(cat last_count.txt)
-          
+          git add prices.json
           if git diff --cached --quiet; then
-            echo "✅ No changes to commit"
+            echo "✅ No changes in prices.json, skipping commit."
           else
-            git commit -m "Update prices (${COUNT} items) [skip ci]"
+            git commit -m "Update prices [skip ci]"
+            git pull --rebase origin main
             git push origin main
           fi
