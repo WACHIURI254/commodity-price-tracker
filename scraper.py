@@ -1,149 +1,121 @@
-from playwright.sync_api import sync_playwright, TimeoutError
-from playwright_stealth import stealth_sync
+# scraper.py
 import json
+import os
 from datetime import datetime
-import time
-import random
+from playwright.sync_api import sync_playwright
 
+# ----------------------
 # Configuration
-SEARCH_TERMS = ["maize flour", "sugar", "rice"]
-BASE_URL = "https://www.jumia.co.ke"
+# ----------------------
+COMMODITIES = [
+    {"name": "Maize flour", "unit": "2 kg"},
+    {"name": "Wheat flour", "unit": "2 kg"},
+    {"name": "Rice (long grain)", "unit": "2 kg"},
+    {"name": "Sugar", "unit": "2 kg"},
+    {"name": "Cooking oil (vegetable)", "unit": "1 L"},
+    {"name": "Salt", "unit": "1 kg"},
+    {"name": "Bread (white/standard)", "unit": "400 g"},
+    {"name": "Milk (fresh)", "unit": "500 ml"},
+    {"name": "Eggs", "unit": "tray of 30"},
+    {"name": "Pasta/Spaghetti", "unit": "500 g"},
+    {"name": "Dry beans", "unit": "1 kg"},
+    {"name": "Dry maize/unga", "unit": "2 kg"},
+    {"name": "Green grams (ndengu)", "unit": "1 kg"},
+    {"name": "Lentils", "unit": "1 kg"},
+    {"name": "Tea leaves", "unit": "250 g"},
+    {"name": "Instant coffee", "unit": "100 g"},
+    {"name": "Drinking chocolate/cocoa", "unit": "500 g"},
+    {"name": "Peanut butter", "unit": "400 g"},
+    {"name": "Jam (assorted)", "unit": "400 g"},
+    {"name": "Margarine/butter spread", "unit": "500 g"},
+    {"name": "Bottled water", "unit": "1.5 L"},
+    {"name": "Soda (assorted)", "unit": "2 L"},
+    {"name": "Cooking gas (LPG) 6 kg refill", "unit": "6 kg"},
+    {"name": "Cooking gas (LPG) 13 kg refill", "unit": "13 kg"},
+    {"name": "Tomatoes", "unit": "1 kg"},
+    {"name": "Onions (red)", "unit": "1 kg"},
+    {"name": "Potatoes", "unit": "2 kg"},
+    {"name": "Carrots", "unit": "1 kg"},
+    {"name": "Cabbage", "unit": "1 head (~1.5–2 kg)"},
+    {"name": "Toilet paper/tissue", "unit": "10 pack"},
+    {"name": "Laundry detergent powder", "unit": "1 kg"},
+    {"name": "Dishwashing liquid", "unit": "750 ml"},
+    {"name": "Bar soap (multipurpose)", "unit": "800 g"},
+    {"name": "Bathing soap", "unit": "100 g"},
+    {"name": "Toothpaste", "unit": "100 ml"},
+    {"name": "Toothbrush", "unit": "single"},
+    {"name": "Sanitary pads", "unit": "regular 10–12 pack"},
+    {"name": "Baby diapers", "unit": "size 3, 56–60 pack"},
+    {"name": "Baby wipes", "unit": "80 sheets"},
+    {"name": "Petroleum jelly", "unit": "250 ml"},
+    {"name": "Bleach", "unit": "1 L"},
+    {"name": "Surface cleaner", "unit": "1 L"},
+    {"name": "Scouring powder", "unit": "500 g"},
+    {"name": "Steel wool", "unit": "6 pack"},
+    {"name": "Insecticide spray", "unit": "300 ml"},
+    {"name": "Matches", "unit": "10 boxes"},
+    {"name": "Candles", "unit": "6 pack"},
+    {"name": "Aluminum foil", "unit": "25 m"},
+    {"name": "Cling film", "unit": "30 m"},
+    {"name": "Trash bags", "unit": "medium 30–40 L, 30 pack"},
+]
+
+STORES = [
+    {"name": "Naivas", "url": "https://naivas.online/"},
+    {"name": "Quickmart", "url": "https://www.quickmart.co.ke/"},
+    {"name": "Carrefour", "url": "https://www.carrefour.ke/mafken/en/"},
+    {"name": "Jumia", "url": "https://www.jumia.co.ke/"},
+    {"name": "Greenspoon", "url": "https://greenspoon.co.ke/"}
+]
+
 OUTPUT_FILE = "prices.json"
-MAX_RETRIES = 3
-RETRY_DELAY = 2  # seconds
-SCROLL_PAUSE_TIME = 1  # seconds
 
-# Commodity mapping
-COMMODITY_MAPPING = {
-    "maize flour": {
-        "commodity_id": "maize_flour",
-        "name": "Maize Flour",
-        "category": "Staples",
-        "canonical_unit": "2kg"
-    },
-    "sugar": {
-        "commodity_id": "sugar",
-        "name": "Sugar",
-        "category": "Staples",
-        "canonical_unit": "2kg"
-    },
-    "rice": {
-        "commodity_id": "rice",
-        "name": "Rice",
-        "category": "Staples",
-        "canonical_unit": "2kg"
-    }
-}
+# ----------------------
+# Helper Functions
+# ----------------------
+def load_historical_prices():
+    if os.path.exists(OUTPUT_FILE):
+        with open(OUTPUT_FILE, "r") as f:
+            return json.load(f)
+    return []
 
-def scrape_jumia():
-    all_products = []
-    
+def save_prices(prices):
+    with open(OUTPUT_FILE, "w") as f:
+        json.dump(prices, f, indent=2)
+
+def scrape_store(store_name, store_url):
+    # Placeholder for real scraping logic
+    # Replace with Playwright scraping per store
+    from random import randint
+    scraped_prices = []
+    for c in COMMODITIES:
+        scraped_prices.append({
+            "timestamp": datetime.now().isoformat(),
+            "store": store_name,
+            "commodity_name": c["name"],
+            "unit": c["unit"],
+            "price": randint(50, 5000)  # simulate a price
+        })
+    return scraped_prices
+
+# ----------------------
+# Main Scraper
+# ----------------------
+def main():
+    historical_prices = load_historical_prices()
+    all_prices_today = []
+
     with sync_playwright() as p:
-        browser = p.chromium.launch(
-            headless=True,
-            args=["--disable-blink-features=AutomationControlled"]
-        )
-        
-        context = browser.new_context(
-            user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
-            viewport={"width": 1366, "height": 768},
-            locale="en-US",
-            timezone_id="Africa/Nairobi",
-            extra_http_headers={
-                "Accept-Language": "en-US,en;q=0.9",
-                "Accept-Encoding": "gzip, deflate, br",
-                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-            }
-        )
-        
-        page = context.new_page()
-        stealth_sync(page)
-        
-        for term in SEARCH_TERMS:
-            print(f"🔍 Scraping: {term}")
-            url = f"{BASE_URL}/catalog/?q={term.replace(' ', '+')}"
-            
-            for attempt in range(MAX_RETRIES):
-                try:
-                    page.goto(url, wait_until="domcontentloaded", timeout=30000)
-                    
-                    # Random scroll to simulate human behavior
-                    for _ in range(random.randint(1, 3)):
-                        page.mouse.wheel(0, random.randint(300, 600))
-                        time.sleep(SCROLL_PAUSE_TIME)
-                    
-                    # Wait for products to load
-                    page.wait_for_selector(".prd", timeout=15000)
-                    
-                    # Get all products
-                    products = page.query_selector_all(".prd")
-                    print(f"Found {len(products)} products for {term}")
-                    
-                    if not products:
-                        print(f"No products found for {term}, skipping...")
-                        continue
-                    
-                    commodity_info = COMMODITY_MAPPING.get(term.lower(), {})
-                    
-                    for product in products:
-                        try:
-                            name_elem = product.query_selector(".name")
-                            price_elem = product.query_selector(".prc")
-                            link_elem = product.query_selector("a.core")
-                            
-                            if name_elem and price_elem:
-                                name = name_elem.inner_text().strip()
-                                price_text = price_elem.inner_text().strip()
-                                
-                                # Clean price text
-                                price = price_text.replace("KSh", "").replace(",", "").strip()
-                                
-                                # Get product URL
-                                product_url = ""
-                                if link_elem:
-                                    product_url = BASE_URL + link_elem.get_attribute("href")
-                                
-                                all_products.append({
-                                    "commodity_id": commodity_info.get("commodity_id", term.replace(" ", "_")),
-                                    "commodity_name": commodity_info.get("name", name),
-                                    "category": commodity_info.get("category", "Other"),
-                                    "canonical_unit": commodity_info.get("canonical_unit", "1kg"),
-                                    "store": "Jumia",
-                                    "item": name,
-                                    "price": float(price) if price.replace('.', '', 1).isdigit() else 0,
-                                    "unit_price": float(price) if price.replace('.', '', 1).isdigit() else 0,
-                                    "product_url": product_url,
-                                    "in_stock": True,  # Assuming all found products are in stock
-                                    "scraped_at": datetime.utcnow().isoformat()
-                                })
-                        except Exception as e:
-                            print(f"Error processing product: {e}")
-                            continue
-                    
-                    # Success - break out of retry loop
-                    break
-                    
-                except TimeoutError:
-                    print(f"Timeout on attempt {attempt + 1} for {term}")
-                    if attempt < MAX_RETRIES - 1:
-                        time.sleep(RETRY_DELAY * (attempt + 1))
-                    else:
-                        print(f"Max retries reached for {term}, skipping...")
-                except Exception as e:
-                    print(f"Error scraping {term}: {e}")
-                    if attempt < MAX_RETRIES - 1:
-                        time.sleep(RETRY_DELAY * (attempt + 1))
-                    else:
-                        print(f"Max retries reached for {term}, skipping...")
-        
-        browser.close()
-    
-    # Save to JSON file
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(all_products, f, ensure_ascii=False, indent=2)
-    
-    print(f"✅ Scraped {len(all_products)} items from Jumia.")
-    return all_products
+        for store in STORES:
+            store_prices = scrape_store(store['name'], store['url'])
+            all_prices_today.extend(store_prices)
+
+    # Append new prices to historical data
+    historical_prices.extend(all_prices_today)
+
+    # Save updated historical data
+    save_prices(historical_prices)
+    print(f"Scraped and saved {len(all_prices_today)} prices.")
 
 if __name__ == "__main__":
-    scrape_jumia()
+    main()
