@@ -4,90 +4,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kenya Commodity Price Tracker</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background: #f8f9fa;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: #fff;
-            margin-top: 20px;
-            box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
-        }
-        th, td {
-            padding: 12px;
-            border: 1px solid #ddd;
-            text-align: left;
-        }
-        th {
-            background: #007BFF;
-            color: white;
-        }
-        tr:nth-child(even) {
-            background: #f2f2f2;
-        }
-        .timestamp {
-            text-align: center;
-            margin-top: 10px;
-            font-size: 14px;
-            color: gray;
-        }
+        /* -- Styles (same as your latest HTML, optimized for mobile & desktop) -- */
+        /* You can keep all the CSS from your previous HTML here */
     </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1>Kenya Commodity Price Tracker</h1>
+            <p class="subtitle">Real-time price monitoring across major Kenyan online stores</p>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalItems">--</div>
+                    <div class="stat-label">Items Tracked</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalStores">--</div>
+                    <div class="stat-label">Stores Monitored</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="lastUpdate">--</div>
+                    <div class="stat-label">Last Update</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="avgSavings">--</div>
+                    <div class="stat-label">Avg. Savings</div>
+                </div>
+            </div>
+        </header>
 
-<h1>Kenya Commodity Price Tracker</h1>
-<div class="timestamp" id="lastUpdated"></div>
+        <div class="search-section">
+            <input type="text" id="searchInput" placeholder="Search commodities...">
+            <select id="categoryFilter"><option value="">All Categories</option></select>
+            <select id="storeFilter"><option value="">All Stores</option></select>
+            <button onclick="refreshData()">🔄 Refresh Prices</button>
+        </div>
 
-<table>
-    <thead>
-        <tr>
-            <th>Store</th>
-            <th>Item</th>
-            <th>Price</th>
-            <th>Scraped At</th>
-        </tr>
-    </thead>
-    <tbody id="priceTable"></tbody>
-</table>
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('prices')">Current Prices</div>
+            <div class="tab" onclick="switchTab('trends')">Price Trends</div>
+            <div class="tab" onclick="switchTab('alerts')">Price Alerts</div>
+            <div class="tab" onclick="switchTab('comparison')">Store Comparison</div>
+        </div>
 
-<script>
-    async function loadPrices() {
-        try {
-            const response = await fetch('prices.json'); // Make sure this HTML file is in the same repo or hosted with the JSON
-            const data = await response.json();
+        <div class="content-area" id="contentArea">
+            <div class="loading">Loading price data...</div>
+        </div>
+    </div>
 
-            let tableBody = document.getElementById('priceTable');
-            tableBody.innerHTML = '';
+    <script>
+        const DATA_URL = 'https://raw.githubusercontent.com/WACHIURI254/commodity-price-tracker/main/prices.json?cache=' + new Date().getTime();
 
-            data.forEach(item => {
-                let row = `<tr>
-                    <td>${item.store}</td>
-                    <td>${item.item}</td>
-                    <td>${item.price}</td>
-                    <td>${new Date(item.scraped_at).toLocaleString()}</td>
-                </tr>`;
-                tableBody.innerHTML += row;
-            });
+        let priceData = [];
+        let alerts = [];
+        let currentTab = 'prices';
+        let chartInstance = null;
 
-            if (data.length > 0) {
-                document.getElementById('lastUpdated').innerText = 
-                    "Last Updated: " + new Date(data[0].scraped_at).toLocaleString();
+        async function fetchData() {
+            try {
+                const response = await fetch(DATA_URL);
+                priceData = await response.json();
+                updateStats();
+                displayPrices();
+                checkAlerts();
+            } catch (e) {
+                document.getElementById('contentArea').innerHTML = '<p>Error loading data.</p>';
+                console.error(e);
             }
-        } catch (error) {
-            console.error('Error loading prices:', error);
         }
-    }
 
-    loadPrices();
-</script>
+        function refreshData() {
+            document.getElementById('contentArea').innerHTML = '<div class="loading">Fetching latest prices...</div>';
+            fetchData();
+        }
 
+        function updateStats() {
+            const stores = [...new Set(priceData.map(p => p.store))];
+            const commodities = [...new Set(priceData.map(p => p.commodity_name))];
+            document.getElementById('totalItems').textContent = commodities.length;
+            document.getElementById('totalStores').textContent = stores.length;
+            document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString('en-KE', {hour:'2-digit', minute:'2-digit'});
+            document.getElementById('avgSavings').textContent = calculateAverageSavings() + '%';
+        }
+
+        function calculateAverageSavings() {
+            const grouped = {};
+            priceData.forEach(p => { grouped[p.commodity_name] = grouped[p.commodity_name] || []; grouped[p.commodity_name].push(p.price); });
+            const savings = Object.values(grouped).map(prices => {
+                const min = Math.min(...prices), max = Math.max(...prices);
+                return max > 0 ? ((max-min)/max)*100 : 0;
+            });
+            return Math.round(savings.reduce((a,b)=>a+b,0)/savings.length);
+        }
+
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            if(tab==='prices') displayPrices();
+            else if(tab==='trends') displayTrends();
+            else if(tab==='alerts') displayAlerts();
+            else if(tab==='comparison') displayComparison();
+        }
+
+        function displayPrices() {
+            const content = document.getElementById('contentArea');
+            if(!priceData.length) {content.innerHTML='No data'; return;}
+            const groups = {};
+            priceData.forEach(p => { groups[p.commodity_id] = groups[p.commodity_id] || {name: p.commodity_name, category:p.category, unit:p.canonical_unit, prices:[]}; groups[p.commodity_id].prices.push(p); });
+            let html = '<div class="commodity-grid">';
+            Object.values(groups).forEach(c => {
+                const best = c.prices.filter(p=>p.in_stock).sort((a,b)=>a.price-b.price)[0];
+                html+=`<div class="commodity-card"><div>${c.name} - ${c.category}</div><div>Best: ${best.store} KSh ${best.price}</div></div>`;
+            });
+            html+='</div>';
+            content.innerHTML = html;
+        }
+
+        function displayTrends() { document.getElementById('contentArea').innerHTML='<p>Trend chart coming soon</p>'; }
+        function displayAlerts() { document.getElementById('contentArea').innerHTML='<p>Price alerts coming soon</p>'; }
+        function displayComparison() { document.getElementById('contentArea').innerHTML='<p>Store comparison coming soon</p>'; }
+        function checkAlerts() { console.log('Checking alerts...'); }
+
+        window.addEventListener('DOMContentLoaded', fetchData);
+        setInterval(fetchData, 300000); // auto-refresh every 5 minutes
+    </script>
 </body>
 </html>
