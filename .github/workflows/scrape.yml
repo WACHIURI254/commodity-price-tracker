@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write  # Allow pushing prices.json
+  contents: write  # Required for push
 
 jobs:
   run:
@@ -16,7 +16,8 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       with:
-        fetch-depth: 0  # Get full history so pull works
+        fetch-depth: 0  # Full history so pull works
+        token: ${{ secrets.GITHUB_TOKEN }}  # Authenticate pull/push
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -33,10 +34,12 @@ jobs:
       run: python scraper.py
 
     - name: Commit and push updated prices.json
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --global user.email "actions@github.com"
         git config --global user.name "GitHub Actions"
         git pull --rebase origin main
         git add prices.json
         git commit -m "Update prices" || echo "No changes to commit"
-        git push
+        git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
