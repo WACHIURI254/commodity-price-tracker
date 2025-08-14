@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenya Commodity Price Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: #f8f9fa;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            margin-top: 20px;
+            box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background: #007BFF;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+        .timestamp {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Kenya Commodity Price Tracker</h1>
+<div class="timestamp" id="lastUpdated"></div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Store</th>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Scraped At</th>
+        </tr>
+    </thead>
+    <tbody id="priceTable"></tbody>
+</table>
+
+<script>
+    async function loadPrices() {
+        try {
+            const response = await fetch('prices.json'); // Make sure this HTML file is in the same repo or hosted with the JSON
+            const data = await response.json();
+
+            let tableBody = document.getElementById('priceTable');
+            tableBody.innerHTML = '';
+
+            data.forEach(item => {
+                let row = `<tr>
+                    <td>${item.store}</td>
+                    <td>${item.item}</td>
+                    <td>${item.price}</td>
+                    <td>${new Date(item.scraped_at).toLocaleString()}</td>
+                </tr>`;
+                tableBody.innerHTML += row;
+            });
+
+            if (data.length > 0) {
+                document.getElementById('lastUpdated').innerText = 
+                    "Last Updated: " + new Date(data[0].scraped_at).toLocaleString();
+            }
+        } catch (error) {
+            console.error('Error loading prices:', error);
+        }
+    }
+
+    loadPrices();
+</script>
+
+</body>
+</html>
