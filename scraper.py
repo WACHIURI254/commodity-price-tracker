@@ -1,10 +1,10 @@
 # scraper.py
 import json
+import os
 from datetime import datetime
-from pathlib import Path
 from playwright.sync_api import sync_playwright
 
-# Canonical list of 50 commodities with units
+# Top 50 commodities with canonical units
 COMMODITIES = [
     {"name": "Maize flour", "unit": "2 kg"},
     {"name": "Wheat flour", "unit": "2 kg"},
@@ -42,8 +42,8 @@ COMMODITIES = [
     {"name": "Bathing soap", "unit": "100 g"},
     {"name": "Toothpaste", "unit": "100 ml"},
     {"name": "Toothbrush", "unit": "single"},
-    {"name": "Sanitary pads", "unit": "10–12 pack"},
-    {"name": "Baby diapers", "unit": "56–60 pack"},
+    {"name": "Sanitary pads", "unit": "regular 10–12 pack"},
+    {"name": "Baby diapers", "unit": "size 3, 56–60 pack"},
     {"name": "Baby wipes", "unit": "80 sheets"},
     {"name": "Petroleum jelly", "unit": "250 ml"},
     {"name": "Bleach", "unit": "1 L"},
@@ -55,69 +55,80 @@ COMMODITIES = [
     {"name": "Candles", "unit": "6 pack"},
     {"name": "Aluminum foil", "unit": "25 m"},
     {"name": "Cling film", "unit": "30 m"},
-    {"name": "Trash bags", "unit": "30–40 L, 30 pack"},
+    {"name": "Trash bags", "unit": "medium 30–40 L, 30 pack"},
 ]
 
-# Online stores to scrape
+# Stores to scrape
 STORES = [
     {"name": "Naivas", "url": "https://naivas.online/"},
     {"name": "Quickmart", "url": "https://www.quickmart.co.ke/"},
     {"name": "Carrefour", "url": "https://www.carrefour.ke/mafken/en/"},
     {"name": "Jumia", "url": "https://www.jumia.co.ke/"},
-    {"name": "Greenspoon", "url": "https://greenspoon.co.ke/"}
+    {"name": "Greenspoon", "url": "https://greenspoon.co.ke/"},
 ]
 
-OUTPUT_FILE = Path("prices.json")
+# Output file
+OUTPUT_FILE = "prices.json"
+
+def load_existing_prices():
+    if os.path.exists(OUTPUT_FILE):
+        with open(OUTPUT_FILE, "r") as f:
+            try:
+                return json.load(f)
+            except:
+                return []
+    return []
+
+def save_prices(prices):
+    with open(OUTPUT_FILE, "w") as f:
+        json.dump(prices, f, indent=2)
 
 def scrape_store(page, store_name, store_url):
-    """Scrape prices for all commodities from a store (simplified version)."""
+    print(f"Scraping {store_name}...")
     results = []
-    page.goto(store_url, timeout=60000)
-    
-    # TODO: Replace this with real search logic per store
-    for item in COMMODITIES:
-        # Dummy example: random price (replace with real scraping logic)
+    for attempt in range(3):
+        try:
+            page.goto(store_url, timeout=60000, wait_until="domcontentloaded")
+            break
+        except Exception as e:
+            print(f"Attempt {attempt+1} failed for {store_name}: {e}")
+            if attempt == 2:
+                print(f"Skipping {store_name} due to repeated failures.")
+                return results
+
+    # Simple placeholder scraping logic
+    # TODO: Replace with real selectors per store
+    for commodity in COMMODITIES:
+        # Example: generate random price for demo
         import random
         price = random.randint(100, 1000)
-        timestamp = datetime.utcnow().isoformat()
         results.append({
-            "name": item["name"],
-            "unit": item["unit"],
+            "commodity": commodity["name"],
+            "unit": commodity["unit"],
             "store": store_name,
             "price": price,
-            "timestamp": timestamp
+            "timestamp": datetime.now().isoformat()
         })
     return results
 
 def main():
-    all_prices = []
+    all_prices = load_existing_prices()
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
         page = browser.new_page()
+        page.set_extra_http_headers({"Accept-Language": "en-US,en;q=0.9"})
+        page.set_user_agent(
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+            "(KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36"
+        )
+
         for store in STORES:
-            print(f"Scraping {store['name']}...")
             store_prices = scrape_store(page, store["name"], store["url"])
             all_prices.extend(store_prices)
+
         browser.close()
-    
-    # Load historical data if exists
-    if OUTPUT_FILE.exists():
-        with open(OUTPUT_FILE, "r") as f:
-            historical_data = json.load(f)
-    else:
-        historical_data = []
-
-    # Append today's prices
-    historical_data.append({
-        "date": datetime.utcnow().date().isoformat(),
-        "prices": all_prices
-    })
-
-    # Save updated historical data
-    with open(OUTPUT_FILE, "w") as f:
-        json.dump(historical_data, f, indent=2)
-    
-    print(f"Scraping complete. Data saved to {OUTPUT_FILE}")
+    save_prices(all_prices)
+    print(f"Saved {len(all_prices)} price records to {OUTPUT_FILE}")
 
 if __name__ == "__main__":
     main()
