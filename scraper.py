@@ -1,4 +1,5 @@
 from playwright.sync_api import sync_playwright
+from playwright_stealth import stealth_sync
 import json
 from datetime import datetime
 
@@ -15,6 +16,9 @@ def scrape_jumia():
         )
 
         page = context.new_page()
+
+        # Apply stealth mode to avoid detection
+        stealth_sync(page)
 
         # Go to Jumia search results for Maize Flour
         page.goto("https://www.jumia.co.ke/catalog/?q=maize+flour", wait_until="domcontentloaded")
