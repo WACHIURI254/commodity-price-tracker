@@ -3,13 +3,8 @@ from playwright_stealth import stealth_sync
 import json
 from datetime import datetime
 
-SEARCH_TERMS = [
-    ("sugar", "sugar"),
-    ("maize flour", "maize+flour"),
-    ("rice", "rice")
-]
-
 def scrape_jumia():
+    search_terms = ["maize flour", "sugar", "rice"]
     all_products = []
 
     with sync_playwright() as p:
@@ -25,11 +20,11 @@ def scrape_jumia():
         page = context.new_page()
         stealth_sync(page)
 
-        for label, query in SEARCH_TERMS:
-            print(f"🔍 Scraping prices for {label}...")
-
-            page.goto(f"https://www.jumia.co.ke/catalog/?q={query}", wait_until="domcontentloaded")
-            page.wait_for_selector(".prd", timeout=10000)
+        for term in search_terms:
+            print(f"🔍 Scraping: {term}")
+            url = f"https://www.jumia.co.ke/catalog/?q={term.replace(' ', '+')}"
+            page.goto(url, wait_until="domcontentloaded")
+            page.wait_for_selector(".prd")
 
             for product in page.query_selector_all(".prd"):
                 name = product.query_selector(".name")
@@ -38,7 +33,7 @@ def scrape_jumia():
                 if name and price:
                     all_products.append({
                         "store": "Jumia",
-                        "category": label,
+                        "search_term": term,
                         "item": name.inner_text().strip(),
                         "price": price.inner_text().strip(),
                         "scraped_at": datetime.utcnow().isoformat()
@@ -46,11 +41,11 @@ def scrape_jumia():
 
         browser.close()
 
-    # Save fresh data, replacing old file
+    # Save to prices.json
     with open("prices.json", "w", encoding="utf-8") as f:
         json.dump(all_products, f, ensure_ascii=False, indent=2)
 
-    print(f"\n✅ Scraped {len(all_products)} total products from Jumia.")
+    print(f"✅ Scraped {len(all_products)} items from Jumia.")
 
 if __name__ == "__main__":
     scrape_jumia()
